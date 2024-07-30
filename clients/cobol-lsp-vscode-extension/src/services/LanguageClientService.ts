@@ -154,8 +154,9 @@ export class LanguageClientService {
     const port = SettingsService.getLspPort();
     if (port) {
       // Connect to language server via socket
+      var host = SettingsService.getLspHost() ?? "localhost";
       const connectionInfo = {
-        host: "localhost",
+        host: host,
         port,
       };
       return () => {

@@ -19,6 +19,7 @@ import {
   PATHS_LOCAL_KEY,
   PATHS_USS,
   PATHS_DSN,
+  SERVER_HOST,
   SERVER_PORT,
   SERVER_RUNTIME,
   SETTINGS_CPY_EXTENSIONS,
@@ -180,6 +181,16 @@ export class SettingsService {
           { scopeUri: documentUri },
           global!,
         );
+  }
+
+  /**
+   * Get Lsp Host from configuration
+   * @returns lsp host string
+   */
+  public static getLspHost(): string | undefined {
+    if (vscode.workspace.getConfiguration().get(SERVER_HOST)) {
+      return vscode.workspace.getConfiguration().get(SERVER_HOST);
+    }
   }
 
   /**

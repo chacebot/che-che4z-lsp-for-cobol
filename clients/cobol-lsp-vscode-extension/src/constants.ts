@@ -25,6 +25,7 @@ export const SETTINGS_SUBROUTINE_LOCAL_KEY =
   "cobol-lsp.subroutine-manager.paths-local";
 export const SETTINGS_TAB_CONFIG: string = "cobol-lsp.smart-tab";
 
+export const SERVER_HOST = "cobol-lsp.server.host";
 export const SERVER_PORT = "cobol-lsp.server.port";
 export const SERVER_RUNTIME = "cobol-lsp.serverRuntime";
 export const DIALECT_LIBS = "cobol-lsp.dialect.libs";
