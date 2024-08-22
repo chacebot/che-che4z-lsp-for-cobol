@@ -57,7 +57,8 @@ class TestCompilerDirectivesNotCauseErrors {
   private static final String TEXT_WRONG_SEQUENCE =
       "{a|1}12     PROCESS CICS('COBOL3,APOST,SP')                                \n"
           + "       Identification Division.\n"
-          + "       Program-Id. 'ACTDCNVI'.";
+          + "       Program-Id. 'ACTDCNVI'.\n"
+          + "       PROCEDURE DIVISION.";
 
   @Test
   void test() {

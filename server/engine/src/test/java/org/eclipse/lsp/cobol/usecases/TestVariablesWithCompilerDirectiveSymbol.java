@@ -32,7 +32,9 @@ public class TestVariablesWithCompilerDirectiveSymbol {
           + "              88 FILLER VALUE 'A'.\n"
           + "          01 {$*DEBUG}.\n"
           + "              05 {$*MATCH} PIC 9.\n"
-          + "          66 FILLER RENAMES {$MATCH}.\n";
+          + "          66 FILLER RENAMES {$MATCH}.\n"
+          + "          PROCEDURE DIVISION.";
+  ;
 
   @Test
   void test() {

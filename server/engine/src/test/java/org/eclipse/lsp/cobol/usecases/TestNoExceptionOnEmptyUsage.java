@@ -32,7 +32,9 @@ class TestNoExceptionOnEmptyUsage {
           + "       PROGRAM-ID. SETINDEX.\n"
           + "       DATA DIVISION.\n"
           + "       WORKING-STORAGE SECTION.\n"
-          + "       01  {$*MRB|1} USAGE{|2|3}\n";
+          + "       01  {$*MRB|1} USAGE{|2|3}\n"
+          + "       PROCEDURE DIVISION.";
+  ;
 
   @Test
   void test() {

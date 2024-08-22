@@ -33,9 +33,7 @@ import java.util.stream.Collectors;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-/**
- * This test checks that we collect all multiple definitions for variable.
- */
+/** This test checks that we collect all multiple definitions for variable. */
 class TestDuplicatedDefinition {
   private static final String TEXT =
       "       IDENTIFICATION DIVISION.\n"
@@ -53,7 +51,8 @@ class TestDuplicatedDefinition {
           + "       DATA DIVISION.\n"
           + "       WORKING-STORAGE SECTION.\n"
           + "       01 {$*VARNAME}  PIC X(20).\n"
-          + "       01 {$*VARNAME}  PIC X(2).\n";
+          + "       01 {$*VARNAME}  PIC X(2).\n"
+          + "       Procedure Division.";
 
   private static final String TEXT_DIFFERENT_LEVEL =
       "       IDENTIFICATION DIVISION.\n"
@@ -87,7 +86,8 @@ class TestDuplicatedDefinition {
           + "           02 {$*VARNAME}.\n"
           + "             03 {$*CHILD} PIC X(2).\n"
           + "       66 {$*RENAME} RENAMES {$VARNAME} THRU {$CHILD} OF {$ROOT}.\n"
-          + "       66 {$*RENAME} RENAMES {$CHILD} OF {$ROOT}.\n";
+          + "       66 {$*RENAME} RENAMES {$CHILD} OF {$ROOT}.\n"
+          + "       PROCEDURE DIVISION.";
 
   private static final String TEXT_AMBIGUOUS_PARAGRAPH =
       "       IDENTIFICATION DIVISION.\n"
@@ -167,23 +167,31 @@ class TestDuplicatedDefinition {
 
   @Test
   void testUsageCheck() {
-    AnalysisResult result = UseCaseEngine.runTest(
-        TEXT,
-        ImmutableList.of(),
-        ImmutableMap.of(
-            "1",
-            new Diagnostic(
-                new Range(),
-                "Ambiguous reference for VARNAME",
-                DiagnosticSeverity.Error,
-                ErrorSource.PARSING.getText())));
-    List<VariableUsageNode> variableUsages = result.getRootNode().getDepthFirstStream()
-        .filter(Node.hasType(NodeType.VARIABLE_USAGE)).map(VariableUsageNode.class::cast).collect(Collectors.toList());
+    AnalysisResult result =
+        UseCaseEngine.runTest(
+            TEXT,
+            ImmutableList.of(),
+            ImmutableMap.of(
+                "1",
+                new Diagnostic(
+                    new Range(),
+                    "Ambiguous reference for VARNAME",
+                    DiagnosticSeverity.Error,
+                    ErrorSource.PARSING.getText())));
+    List<VariableUsageNode> variableUsages =
+        result
+            .getRootNode()
+            .getDepthFirstStream()
+            .filter(Node.hasType(NodeType.VARIABLE_USAGE))
+            .map(VariableUsageNode.class::cast)
+            .collect(Collectors.toList());
     assertEquals(1, variableUsages.size());
-    List<Location> expectedLocations = ImmutableList.of(
-        new Location(UseCaseUtils.DOCUMENT_URI, new Range(new Position(4, 7), new Position(4, 29))),
-        new Location(UseCaseUtils.DOCUMENT_URI, new Range(new Position(5, 7), new Position(5, 28)))
-    );
+    List<Location> expectedLocations =
+        ImmutableList.of(
+            new Location(
+                UseCaseUtils.DOCUMENT_URI, new Range(new Position(4, 7), new Position(4, 29))),
+            new Location(
+                UseCaseUtils.DOCUMENT_URI, new Range(new Position(5, 7), new Position(5, 28))));
     List<Location> locations = variableUsages.get(0).getDefinitions();
     assertEquals(locations.size(), expectedLocations.size());
     locations.forEach(location -> assertTrue(expectedLocations.contains(location)));
@@ -211,24 +219,30 @@ class TestDuplicatedDefinition {
 
   @Test
   void testAmbiguousParagraph() {
-    UseCaseEngine.runTest(TEXT_AMBIGUOUS_PARAGRAPH, ImmutableList.of(), ImmutableMap.of(
-        "1",
-        new Diagnostic(
-            new Range(),
-            "Ambiguous reference for PARAG1",
-            DiagnosticSeverity.Error,
-            ErrorSource.PARSING.getText())));
+    UseCaseEngine.runTest(
+        TEXT_AMBIGUOUS_PARAGRAPH,
+        ImmutableList.of(),
+        ImmutableMap.of(
+            "1",
+            new Diagnostic(
+                new Range(),
+                "Ambiguous reference for PARAG1",
+                DiagnosticSeverity.Error,
+                ErrorSource.PARSING.getText())));
   }
 
   @Test
   void testAmbiguousSection() {
-    UseCaseEngine.runTest(TEXT_AMBIGUOUS_SECTION, ImmutableList.of(), ImmutableMap.of(
-        "1",
-        new Diagnostic(
-            new Range(),
-            "Ambiguous reference for SEC1",
-            DiagnosticSeverity.Error,
-            ErrorSource.PARSING.getText())));
+    UseCaseEngine.runTest(
+        TEXT_AMBIGUOUS_SECTION,
+        ImmutableList.of(),
+        ImmutableMap.of(
+            "1",
+            new Diagnostic(
+                new Range(),
+                "Ambiguous reference for SEC1",
+                DiagnosticSeverity.Error,
+                ErrorSource.PARSING.getText())));
   }
 
   @Test
@@ -238,7 +252,8 @@ class TestDuplicatedDefinition {
 
   @Test
   void testDuplicatedSection_withoutUsage() {
-    UseCaseEngine.runTest(TEXT_DUPLICATED_SECTION_WITHOUT_USAGE, ImmutableList.of(), ImmutableMap.of());
+    UseCaseEngine.runTest(
+        TEXT_DUPLICATED_SECTION_WITHOUT_USAGE, ImmutableList.of(), ImmutableMap.of());
   }
 
   @Test
@@ -248,34 +263,41 @@ class TestDuplicatedDefinition {
 
   @Test
   void testAmbiguousParagraph_withSection() {
-    UseCaseEngine.runTest(TEXT_PARAGRAPH_WITH_SECTION_AMBIGUOUS, ImmutableList.of(), ImmutableMap.of(
-        "1",
-        new Diagnostic(
-            new Range(),
-            "Ambiguous reference for PARAG1",
-            DiagnosticSeverity.Error,
-            ErrorSource.PARSING.getText())));
+    UseCaseEngine.runTest(
+        TEXT_PARAGRAPH_WITH_SECTION_AMBIGUOUS,
+        ImmutableList.of(),
+        ImmutableMap.of(
+            "1",
+            new Diagnostic(
+                new Range(),
+                "Ambiguous reference for PARAG1",
+                DiagnosticSeverity.Error,
+                ErrorSource.PARSING.getText())));
   }
 
   @Test
   void testParagraph_forDifferentSections() {
-    UseCaseEngine.runTest(TEXT_PARAGRAPH_FOR_DIFFERENT_SECTIONS, ImmutableList.of(), ImmutableMap.of());
+    UseCaseEngine.runTest(
+        TEXT_PARAGRAPH_FOR_DIFFERENT_SECTIONS, ImmutableList.of(), ImmutableMap.of());
   }
 
   @Test
   void testParagraph_forDifferentScopes() {
-    UseCaseEngine.runTest(TEXT_PARAGRAPH_FOR_DIFFERENT_SCOPES, ImmutableList.of(), ImmutableMap.of());
+    UseCaseEngine.runTest(
+        TEXT_PARAGRAPH_FOR_DIFFERENT_SCOPES, ImmutableList.of(), ImmutableMap.of());
   }
 
   @Test
   void testParagraph_notDefined() {
-    UseCaseEngine.runTest(TEXT_PARAGRAPH_NOT_DEFINED, ImmutableList.of(), ImmutableMap.of(
-        "1",
-        new Diagnostic(
-            new Range(),
-            "The following paragraph is not defined: PARAG1",
-            DiagnosticSeverity.Error,
-            ErrorSource.PARSING.getText())));
+    UseCaseEngine.runTest(
+        TEXT_PARAGRAPH_NOT_DEFINED,
+        ImmutableList.of(),
+        ImmutableMap.of(
+            "1",
+            new Diagnostic(
+                new Range(),
+                "The following paragraph is not defined: PARAG1",
+                DiagnosticSeverity.Error,
+                ErrorSource.PARSING.getText())));
   }
-
 }

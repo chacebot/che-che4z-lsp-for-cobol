@@ -34,8 +34,8 @@ class TestUnexpectedTextInIdentificationDivision {
           + "       data division.\n"
           + "       working-storage section.\n"
           + "       01 VARNAME PIC X(3) VALUE \"ABC\".\n"
-          + "       procedure division.\n"
-          + "           DISPLAY VARNAME.";
+          + "       PROCEDURE DIVISION.\n"
+          + "           DISPLAY VARNAME.\n";
 
   @Test
   void test() {

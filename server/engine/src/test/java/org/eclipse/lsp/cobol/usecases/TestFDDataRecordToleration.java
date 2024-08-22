@@ -55,7 +55,9 @@ public class TestFDDataRecordToleration {
           + "                                     DEPENDING ON {$WS-LG}.\n"
           + "       WORKING-STORAGE SECTION.\n"
           + "       01  {$*LT}.\n"
-          + "           05 {$*WS-LG}         PIC  9(08) VALUE ZERO.\n";
+          + "           05 {$*WS-LG}         PIC  9(08) VALUE ZERO.\n"
+          + "       PROCEDURE DIVISION.";
+  ;
   private static final String TEXT_TOLERATE_RECORD_ARE =
       BASE + "           DATA   RECORD  ARE {$ENR-VAR}\n" + SUFFIX;
 

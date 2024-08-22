@@ -38,7 +38,8 @@ class TestPICVariableStructure {
           + "       01  {$*TEST4} PIC -.9(1).\n"
           + "       01  {$*TEST5} PIC .9+(1).\n"
           + "       01  {$*TEST6} PIC .Z(1).\n"
-          + "       01  {$*TEST7} PIC ./(1).\n";
+          + "       01  {$*TEST7} PIC ./(1).\n"
+          + "       PROCEDURE DIVISION.\n";
 
   private static final String TEXT2 =
       "       IDENTIFICATION DIVISION.                                         \n"
@@ -48,7 +49,8 @@ class TestPICVariableStructure {
           + "       WORKING-STORAGE SECTION.                                         \n"
           + "       77  {$*DATA-J}                             PICTURE IS {W|1}WWWW.         \n"
           + "       {77|2}  {$*DATA-S}             PICTURE X(20) VALUE               \"OFFSET \n"
-          + "      -             \"CONTINUATION \".     ";
+          + "      -             \"CONTINUATION \".     \n"
+          + "       PROCEDURE DIVISION.\n";
 
   @Test
   void test() {

@@ -27,7 +27,9 @@ class TestPositiveCase {
           + "       ENVIRONMENT DIVISION.\n"
           + "       DATA DIVISION.\n"
           + "       WORKING-STORAGE SECTION.\n"
-          + "       01  {$*VAR}     PIC S9(4) COMP.";
+          + "       01  {$*VAR}     PIC S9(4) COMP.\n"
+          + "       PROCEDURE DIVISION.";
+  ;
 
   @Test
   void test() {

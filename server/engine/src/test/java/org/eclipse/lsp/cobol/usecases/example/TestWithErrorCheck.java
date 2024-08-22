@@ -32,7 +32,9 @@ class TestWithErrorCheck {
           + "       ENVIRONMENT DIVISION.\n"
           + "       DATA DIVISION.\n"
           + "       WORKING-STORAGE SECTION.\n"
-          + "       01  {$*VAR}     PIC S9(4) COMP{|1}";
+          + "       01  {$*VAR}     PIC S9(4) COMP{|1}\n"
+          + "       PROCEDURE DIVISION.";
+  ;
 
   @Test
   void test() {
@@ -43,7 +45,7 @@ class TestWithErrorCheck {
             "1",
             new Diagnostic(
                 new Range(),
-                    "A period was assumed before \"<EOF>\".",
+                "A period was assumed before \"<EOF>\".",
                 DiagnosticSeverity.Error,
                 ErrorSource.PARSING.getText())),
         CobolLanguageId.COBOL);
@@ -63,5 +65,4 @@ class TestWithErrorCheck {
                 ErrorSource.PARSING.getText())),
         CobolLanguageId.EXPERIMENTAL_COBOL);
   }
-
 }

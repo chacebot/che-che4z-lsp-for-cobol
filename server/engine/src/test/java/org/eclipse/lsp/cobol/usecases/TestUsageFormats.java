@@ -45,7 +45,9 @@ class TestUsageFormats {
           + "          02 {$*ID13}          PIC X(15) Usage is Display.\n"
           + "       01 {$*ID14}.\n"
           + "        05 {$*ID15} PICTURE X(4)  USAGE DISPLAY.\n"
-          + "        05 {$*ID16} POINTER.";
+          + "        05 {$*ID16} POINTER.\n"
+          + "       PROCEDURE DIVISION.";
+  ;
 
   @Test
   void test() {

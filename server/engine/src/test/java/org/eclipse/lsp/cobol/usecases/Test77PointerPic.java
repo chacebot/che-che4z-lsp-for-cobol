@@ -19,9 +19,7 @@ import com.google.common.collect.ImmutableMap;
 import org.eclipse.lsp.cobol.test.engine.UseCaseEngine;
 import org.junit.jupiter.api.Test;
 
-/**
- * Level 77 should be handled as the root level.
- */
+/** Level 77 should be handled as the root level. */
 public class Test77PointerPic {
   private static final String TEXT =
       "       IDENTIFICATION DIVISION.\n"
@@ -30,7 +28,9 @@ public class Test77PointerPic {
           + "       WORKING-STORAGE SECTION.\n"
           + "       01 {$*ROOT}.\n"
           + "         02 {$*A} POINTER.\n"
-          + "       77 {$*B} PIC X VALUE X'00'.";
+          + "       77 {$*B} PIC X VALUE X'00'.\n"
+          + "       PROCEDURE DIVISION.";
+  ;
 
   @Test
   void test() {

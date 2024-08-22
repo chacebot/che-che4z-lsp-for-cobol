@@ -25,39 +25,41 @@ import org.eclipse.lsp4j.DiagnosticSeverity;
 import org.eclipse.lsp4j.Range;
 import org.junit.jupiter.api.Test;
 
-/**
- * Test no Null pointer exceptions are thrown for incomplete copy replace statements
- */
+/** Test no Null pointer exceptions are thrown for incomplete copy replace statements */
 class TestNoNullPointerExpForIncompleteReplaceStatement {
   private static final String TEXT2 =
-          "       IDENTIFICATION DIVISION.\n"
-                  + "       PROGRAM-ID. TEST1.\n"
-                  + "       ENVIRONMENT DIVISION.\n"
-                  + "       INPUT-OUTPUT SECTION.\n"
-                  + "       FILE-CONTROL.\n"
-                  + "           SELECT {$CUSTOMER-FILE-OUT} ASSIGN TO CUSTOUT\n"
-                  + "               ACCESS IS SEQUENTIAL.\n"
-                  + "       DATA DIVISION.\n"
-                  + "       FILE SECTION.                                                    \n"
-                  + "       FD  {$*CUSTOMER-FILE-OUT}\n"
-                  + "           RECORDING MODE IS V\n"
-                  + "           BLOCK CONTAINS 0 RECORDS\n"
-                  + "           RECORD IS VARYING FROM 20 TO 596 CHARACTERS.\n"
-                  + "           {copy|1} custcopy REPLACING =";
+      "       IDENTIFICATION DIVISION.\n"
+          + "       PROGRAM-ID. TEST1.\n"
+          + "       ENVIRONMENT DIVISION.\n"
+          + "       INPUT-OUTPUT SECTION.\n"
+          + "       FILE-CONTROL.\n"
+          + "           SELECT {$CUSTOMER-FILE-OUT} ASSIGN TO CUSTOUT\n"
+          + "               ACCESS IS SEQUENTIAL.\n"
+          + "       DATA DIVISION.\n"
+          + "       FILE SECTION.                                                    \n"
+          + "       FD  {$*CUSTOMER-FILE-OUT}\n"
+          + "           RECORDING MODE IS V\n"
+          + "           BLOCK CONTAINS 0 RECORDS\n"
+          + "           RECORD IS VARYING FROM 20 TO 596 CHARACTERS.\n"
+          + "           {copy|1} custcopy REPLACING =";
 
-  private static final String TEXT = TEXT2 + "=";
+  ;
+
+  private static final String TEXT = TEXT2 + "=" + "\n       PROCEDURE DIVISION.";
+  ;
 
   @Test
   void testWhenTypingEndsAtDoubleEqualChar() {
     UseCaseEngine.runTest(
-            TEXT,
-            ImmutableList.of(),
-            ImmutableMap.of(
-                    "1",
-                    new Diagnostic(
-                            new Range(), "Syntax error on 'copy'",
-                            DiagnosticSeverity.Error,
-                            ErrorSource.PARSING.getText())),
+        TEXT,
+        ImmutableList.of(),
+        ImmutableMap.of(
+            "1",
+            new Diagnostic(
+                new Range(),
+                "Syntax error on 'copy'",
+                DiagnosticSeverity.Error,
+                ErrorSource.PARSING.getText())),
         CobolLanguageId.COBOL);
   }
 
@@ -69,7 +71,8 @@ class TestNoNullPointerExpForIncompleteReplaceStatement {
         ImmutableMap.of(
             "1",
             new Diagnostic(
-                new Range(), "Extraneous input 'copy'",
+                new Range(),
+                "Extraneous input 'copy'",
                 DiagnosticSeverity.Error,
                 ErrorSource.PARSING.getText())),
         CobolLanguageId.EXPERIMENTAL_COBOL);
@@ -78,29 +81,30 @@ class TestNoNullPointerExpForIncompleteReplaceStatement {
   @Test
   void testWhenTypingEndsAtSingleEqualChar() {
     UseCaseEngine.runTest(
-            TEXT2,
-            ImmutableList.of(),
-            ImmutableMap.of(
-                    "1",
-                    new Diagnostic(
-                            new Range(), "Syntax error on 'copy'",
-                            DiagnosticSeverity.Error,
-                            ErrorSource.PARSING.getText())),
+        TEXT2 + "\n       PROCEDURE DIVISION.",
+        ImmutableList.of(),
+        ImmutableMap.of(
+            "1",
+            new Diagnostic(
+                new Range(),
+                "Syntax error on 'copy'",
+                DiagnosticSeverity.Error,
+                ErrorSource.PARSING.getText())),
         CobolLanguageId.COBOL);
   }
 
   @Test
   void testHwWhenTypingEndsAtSingleEqualChar() {
     UseCaseEngine.runTest(
-        TEXT2,
+        TEXT2 + "\n       PROCEDURE DIVISION.",
         ImmutableList.of(),
         ImmutableMap.of(
             "1",
             new Diagnostic(
-                new Range(), "Extraneous input 'copy'",
+                new Range(),
+                "Extraneous input 'copy'",
                 DiagnosticSeverity.Error,
                 ErrorSource.PARSING.getText())),
         CobolLanguageId.EXPERIMENTAL_COBOL);
   }
-
 }

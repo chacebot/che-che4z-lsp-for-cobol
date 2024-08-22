@@ -33,7 +33,9 @@ class TestSqlBeginDeclareSectionStatement {
           + "             05 {$*WS-STUDENT-ID} PIC 9(4).\n"
           + "             05 {$*WS-STUDENT-NAME} PIC X(25).\n"
           + "             05 {$*WS-STUDENT-ADDR} PIC X(25).\n"
-          + "           EXEC SQL END DECLARE SECTION END-EXEC.\n";
+          + "           EXEC SQL END DECLARE SECTION END-EXEC.\n"
+          + "       PROCEDURE DIVISION.";
+  ;
 
   @Test
   void test() {

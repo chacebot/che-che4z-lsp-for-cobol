@@ -40,7 +40,8 @@ class TestVariableInFileControl {
           + "        FD  {$*FOO1} \n"
           + "           LABEL RECORDS ARE STANDARD. \n"
           + "       WORKING-STORAGE SECTION.\n"
-          + "       01  {$*BAR}  PIC  X(2).";
+          + "       01  {$*BAR}  PIC  X(2).\n"
+          + "       PROCEDURE DIVISION.";
 
   @Test
   void test() {
@@ -49,6 +50,10 @@ class TestVariableInFileControl {
         ImmutableList.of(),
         ImmutableMap.of(
             "1",
-            new Diagnostic(new Range(), "Variable BAZ is not defined", DiagnosticSeverity.Error,  ErrorSource.PARSING.getText())));
+            new Diagnostic(
+                new Range(),
+                "Variable BAZ is not defined",
+                DiagnosticSeverity.Error,
+                ErrorSource.PARSING.getText())));
   }
 }

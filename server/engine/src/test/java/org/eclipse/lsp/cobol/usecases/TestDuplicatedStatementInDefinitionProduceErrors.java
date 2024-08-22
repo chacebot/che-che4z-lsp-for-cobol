@@ -34,42 +34,53 @@ class TestDuplicatedStatementInDefinitionProduceErrors {
           + "       PROGRAM-ID. TEST1.\n"
           + "       DATA DIVISION.\n"
           + "       WORKING-STORAGE SECTION.\n       ";
-  private static final String DUPLICATED_PIC = "01 {$*VARNAME|1} PIC 9 PIC X.";
-  private static final String DUPLICATED_VALUE = "01 {$*VARNAME|1} PIC 9 VALUE 0 VALUE 1 VALUE 2.";
-  private static final String DUPLICATED_USAGE = "01 {$*VARNAME|1} USAGE DISPLAY USAGE POINTER.";
+  private static final String DUPLICATED_PIC =
+      "01 {$*VARNAME|1} PIC 9 PIC X." + "\n       PROCEDURE DIVISION.";
+  private static final String DUPLICATED_VALUE =
+      "01 {$*VARNAME|1} PIC 9 VALUE 0 VALUE 1 VALUE 2." + "\n       PROCEDURE DIVISION.";
+  ;
+  private static final String DUPLICATED_USAGE =
+      "01 {$*VARNAME|1} USAGE DISPLAY USAGE POINTER." + "\n       PROCEDURE DIVISION.";
+  ;
   private static final String DUPLICATED_OCCURS =
-      "01 {$*VARNAME|1} OCCURS 12 TIMES PIC 9 occurs 0 to 512 times.";
+      "01 {$*VARNAME|1} OCCURS 12 TIMES PIC 9 occurs 0 to 512 times."
+          + "\n       PROCEDURE DIVISION.";
+  ;
   private static final String DUPLICATED_MIX =
-      "01 {$*VARNAME|1|2|3} PIC 9 PIC X VALUE 0 VALUE 1 USAGE DISPLAY POINTER.";
-  private static final String DUPLICATED_USAGE_WITHOUT_TOKEN = "01 {$*VARNAME|1} DISPLAY POINTER.";
+      "01 {$*VARNAME|1|2|3} PIC 9 PIC X VALUE 0 VALUE 1 USAGE DISPLAY POINTER."
+          + "\n       PROCEDURE DIVISION.";
+  ;
+  private static final String DUPLICATED_USAGE_WITHOUT_TOKEN =
+      "01 {$*VARNAME|1} DISPLAY POINTER." + "\n       PROCEDURE DIVISION.";
+  ;
 
   private static final Diagnostic DIAGNOSTIC_PIC =
       new Diagnostic(
           new Range(),
           "A duplicate PICTURE clause was found in a data description entry",
           DiagnosticSeverity.Error,
-           ErrorSource.PARSING.getText());
+          ErrorSource.PARSING.getText());
 
   private static final Diagnostic DIAGNOSTIC_VALUE =
       new Diagnostic(
           new Range(),
           "A duplicate VALUE clause was found in a data description entry",
           DiagnosticSeverity.Error,
-           ErrorSource.PARSING.getText());
+          ErrorSource.PARSING.getText());
 
   private static final Diagnostic DIAGNOSTIC_USAGE =
       new Diagnostic(
           new Range(),
           "A duplicate USAGE clause was found in a data description entry",
           DiagnosticSeverity.Error,
-           ErrorSource.PARSING.getText());
+          ErrorSource.PARSING.getText());
 
   private static final Diagnostic DIAGNOSTIC_OCCURS =
       new Diagnostic(
           new Range(),
           "A duplicate OCCURS clause was found in a data description entry",
           DiagnosticSeverity.Error,
-           ErrorSource.PARSING.getText());
+          ErrorSource.PARSING.getText());
 
   @Test
   void testDuplicatedPicProducesError() {

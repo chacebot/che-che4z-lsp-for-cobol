@@ -72,6 +72,7 @@ class TestMarginAB {
           + "           PERFORM WITH TEST BEFORE UNTIL TAPARM2 = 0\n"
           + "             SUBTRACT 1 FROM TAPARM2\n"
           + "           END-PERFORM.\n"
+          + "        PROCEDURE DIVISION.\n"
           + "        END PROGRAM FILETOTEST.";
 
   /** In TEXT_AREA_B there are several statements starting on the wrong position */
@@ -124,11 +125,12 @@ class TestMarginAB {
           + "000000     MOVE 'ILSPR' TO LOC-ID.\n"
           + "000000     MOVE 'AIX' TO OP-SYS.\n"
           + "000000  END PROGRAM FILETOTEST2."; // PROGRAM-ID must be similar with PROGRAM-ID
+
   // mentioned on ID DIVISION
 
   /** In TEXT_DECLARATIVES the mistake is on the DECLARATIVE line */
   private static final String TEXT_DECLARATIVES =
-            "       IDENTIFICATION DIVISION.\n"
+      "       IDENTIFICATION DIVISION.\n"
           + "        PROGRAM-ID.    FILETOTEST.\n"
           + "        AUTHOR. SERGIU ILIE.\n"
           + "       DATA DIVISION.\n"
@@ -161,7 +163,8 @@ class TestMarginAB {
 
   @Test
   void checkForAreaB() {
-    AnalysisResult result = UseCaseUtils.analyze(UseCase.builder().text(TEXT_AREA_B).build(), CobolLanguageId.COBOL);
+    AnalysisResult result =
+        UseCaseUtils.analyze(UseCase.builder().text(TEXT_AREA_B).build(), CobolLanguageId.COBOL);
     assertEquals(5, result.getDiagnostics().get(UseCaseUtils.DOCUMENT_URI).size());
   }
 

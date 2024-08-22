@@ -58,7 +58,8 @@ class TestPicClausesNotCauseSyntaxErrors {
           + "014700     02 FILLER PICTURE IS X(99) VALUE IS \" FEATURE              PADB2014.2\n"
           + "014800-    \"SS  PARAGRAPH-NAME                                          DB2014.2\n"
           + "014900-    \"        REMARKS\".                                           DB2014.2\n"
-          + "015000     02 FILLER PICTURE IS X(20) VALUE IS SPACE.                   DB2014.2";
+          + "015000     02 FILLER PICTURE IS X(20) VALUE IS SPACE.                   DB2014.2\n"
+          + "4      PROCEDURE DIVISION.";
 
   @Test
   void test() {
@@ -66,12 +67,9 @@ class TestPicClausesNotCauseSyntaxErrors {
         TEXT, ImmutableList.of(new CobolText(REPL_NAME, REPL)), ImmutableMap.of());
   }
 
-  /**
-   * Ref - https://www.ibm.com/docs/en/cobol-zos/6.2?topic=entry-picture-clause
-   */
+  /** Ref - https://www.ibm.com/docs/en/cobol-zos/6.2?topic=entry-picture-clause */
   @Test
   void testWhenPictureClauseSucceededByIS_thenNoError() {
-    UseCaseEngine.runTest(
-            TEXT2, ImmutableList.of(), ImmutableMap.of());
+    UseCaseEngine.runTest(TEXT2, ImmutableList.of(), ImmutableMap.of());
   }
 }

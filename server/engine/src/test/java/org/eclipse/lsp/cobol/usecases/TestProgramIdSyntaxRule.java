@@ -26,13 +26,25 @@ import org.junit.jupiter.api.Test;
  */
 public class TestProgramIdSyntaxRule {
   public static final String TEXT1 =
-      "      *\n" + "       IDENTIFICATION DIVISION.\n" + "       PROGRAM-ID SLICKB0";
+      "      *\n"
+          + "       IDENTIFICATION DIVISION.\n"
+          + "       PROGRAM-ID SLICKB0\n"
+          + "       PROCEDURE DIVISION.";
+  ;
 
   public static final String TEXT2 =
-      "      *\n" + "       IDENTIFICATION DIVISION.\n" + "       PROGRAM-ID. SLICKB0";
+      "      *\n"
+          + "       IDENTIFICATION DIVISION.\n"
+          + "       PROGRAM-ID. SLICKB0\n"
+          + "       PROCEDURE DIVISION.";
+  ;
 
   public static final String TEXT3 =
-      "      *\n" + "       IDENTIFICATION DIVISION.\n" + "       PROGRAM-ID. SLICKB0.";
+      "      *\n"
+          + "       IDENTIFICATION DIVISION.\n"
+          + "       PROGRAM-ID. SLICKB0.\n"
+          + "       PROCEDURE DIVISION.";
+  ;
 
   @Test
   void testWhenProgramIdAndProgramNameNotFollowedByDot_ThenNoError() {

@@ -34,7 +34,7 @@ class TestEmptyOptionalParagraphs {
           + "       data division.\n"
           + "       working-storage section.\n"
           + "       01 {$*VARNAME} PIC X(3) VALUE \"ABC\".\n"
-          + "       procedure division.\n"
+          + "       PROCEDURE DIVISION.\n"
           + "           DISPLAY {$VARNAME}.";
 
   @Test

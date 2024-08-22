@@ -73,7 +73,9 @@ class TestContinuationLine {
           + "           THE-BIG-OL-LITERAL-ALPHABET IS \"A+0B-1C*2D/3E=4Fl5G,6H;7I.8J\"\n"
           + "      -    \"\"9K(L)M>N<O PQRSTUVWXYZ\".                                   \n"
           + "      *                                                                 \n"
-          + "      *                                                                 ";
+          + "      *                                                                 \n"
+          + "       PROCEDURE DIVISION.";
+  ;
 
   private static final String TEXT3 =
       "       IDENTIFICATION DIVISION.\n"
@@ -108,7 +110,9 @@ class TestContinuationLine {
           + "           02 FILLER  PIC IS X(65)    VALUE IS \"************************NC2354.2\n"
           + "      -    \"*****************************************\".                 NC2354.2\n"
           + "           02 FILLER  PIC IS X(54)    VALUE IS \"************************NC2354.2\n"
-          + "      -    \"******************************\".";
+          + "      -    \"******************************\".\n"
+          + "       PROCEDURE DIVISION.";
+  ;
 
   private static final String CONT_LINE_DATA_REF =
       "       IDENTIFICATION DIVISION.\n"

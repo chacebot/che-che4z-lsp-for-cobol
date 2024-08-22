@@ -46,7 +46,8 @@ public class TestCICSTranslatorOptions {
           + "       PROGRAM-ID.  AB01FORE.\n"
           + "       ENVIRONMENT DIVISION.\n"
           + "       DATA DIVISION.\n"
-          + "       WORKING-STORAGE SECTION.";
+          + "       WORKING-STORAGE SECTION.\n"
+          + "       PROCEDURE DIVISION.\n";
 
   public static final String MIXED_COMPILER_DIRECTIVE_CICS_TRANSLATOR =
       "       CBL XOPTS (COBOL3 CBLCARD) ADATA, NOADATA AFP(NOVOLATILE)\n"
@@ -54,7 +55,8 @@ public class TestCICSTranslatorOptions {
           + "       PROGRAM-ID.  AB01FORE.\n"
           + "       ENVIRONMENT DIVISION.\n"
           + "       DATA DIVISION.\n"
-          + "       WORKING-STORAGE SECTION.";
+          + "       WORKING-STORAGE SECTION.\n"
+          + "       PROCEDURE DIVISION.\n";
 
   private static Stream<String> getOptions() {
     return Stream.of(
@@ -133,7 +135,6 @@ public class TestCICSTranslatorOptions {
     Map<String, List<Diagnostic>> diagnostics = analyze.getDiagnostics();
     Assertions.assertEquals(1, diagnostics.get(UseCaseUtils.DOCUMENT_URI).size());
     Assertions.assertEquals(
-        "Syntax error on 'XOPTS'",
-        diagnostics.get(UseCaseUtils.DOCUMENT_URI).get(0).getMessage());
+        "Syntax error on 'XOPTS'", diagnostics.get(UseCaseUtils.DOCUMENT_URI).get(0).getMessage());
   }
 }

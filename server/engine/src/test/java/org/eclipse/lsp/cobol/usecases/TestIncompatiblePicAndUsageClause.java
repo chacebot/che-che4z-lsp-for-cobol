@@ -40,7 +40,8 @@ class TestIncompatiblePicAndUsageClause {
           + "            02  {$*Payroll-HOURS} OCCURS 1 TO 52 TIMES.\n"
           + "            05  {$*A} COMP-1.\n"
           + "                10 {$*B-1|5} PICTURE X(2).\n"
-          + "                10 {$*B-2} PICTURE 9(4) COMP-5.";
+          + "                10 {$*B-2} PICTURE 9(4) COMP-5.\n"
+          + "       PROCEDURE DIVISION.";
 
   private static final String MESSAGE_1 = "PICTURE clause incompatible with usage ";
   private static final String MESSAGE_2 = "PICTURE and USAGE clause are not compatible";

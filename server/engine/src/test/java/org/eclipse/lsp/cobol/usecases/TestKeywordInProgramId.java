@@ -30,6 +30,7 @@ class TestKeywordInProgramId {
           + "       END PROGRAM TEST1.\n"
           + "        IDENTIFICATION DIVISION.\n"
           + "        PROGRAM-ID. ADDRES1.\n"
+          + "       PROCEDURE DIVISION.\n"
           + "       END PROGRAM ADDRES1.\n";
 
   @Test

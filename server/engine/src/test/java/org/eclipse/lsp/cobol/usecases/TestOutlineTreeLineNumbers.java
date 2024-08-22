@@ -57,7 +57,8 @@ class TestOutlineTreeLineNumbers {
             .put("LINKAGE SECTION", new LineRange(3, 6))
             .put("WORKING-STORAGE SECTION", new LineRange(4, 6))
             .put("STRUCTNAME", new LineRange(5, 6))
-            .put("VARNAME", new LineRange(6, 6))
+            .put("VARNAME", new LineRange(6, 7))
+            .put("PROCEDURE DIVISION", new LineRange(7, 7))
             .build();
     assertEquals(
         expectedRanges,
@@ -69,25 +70,30 @@ class TestOutlineTreeLineNumbers {
   @Test
   void testWhenCicsTranslateIsDisabled() {
     AnalysisResult result =
-            UseCaseUtils.analyze(
-                    UseCase.builder().text(TEXT).cicsTranslator(false).copybook(new CobolText("BAR", "")).build());
+        UseCaseUtils.analyze(
+            UseCase.builder()
+                .text(TEXT)
+                .cicsTranslator(false)
+                .copybook(new CobolText("BAR", ""))
+                .build());
 
     Map<String, LineRange> expectedRanges =
-            new ImmutableMap.Builder<String, LineRange>()
-                    .put("COPY BAR", new LineRange(0, 0))
-                    .put("PROGRAM: TEST", new LineRange(1, 6))
-                    .put("IDENTIFICATION DIVISION", new LineRange(1, 2))
-                    .put("PROGRAM-ID TEST", new LineRange(2, 2))
-                    .put("DATA DIVISION", new LineRange(3, 6))
-                    .put("WORKING-STORAGE SECTION", new LineRange(4, 6))
-                    .put("STRUCTNAME", new LineRange(5, 6))
-                    .put("VARNAME", new LineRange(6, 6))
-                    .build();
+        new ImmutableMap.Builder<String, LineRange>()
+            .put("COPY BAR", new LineRange(0, 0))
+            .put("PROGRAM: TEST", new LineRange(1, 6))
+            .put("IDENTIFICATION DIVISION", new LineRange(1, 2))
+            .put("PROGRAM-ID TEST", new LineRange(2, 2))
+            .put("DATA DIVISION", new LineRange(3, 6))
+            .put("WORKING-STORAGE SECTION", new LineRange(4, 6))
+            .put("STRUCTNAME", new LineRange(5, 6))
+            .put("VARNAME", new LineRange(6, 6))
+            .put("PROCEDURE DIVISION", new LineRange(7, 7))
+            .build();
     assertEquals(
-            expectedRanges,
-            extractLineRange(
-                    BuildOutlineTreeFromSyntaxTree.convert(
-                            result.getRootNode(), result.getRootNode().getLocality().getUri())));
+        expectedRanges,
+        extractLineRange(
+            BuildOutlineTreeFromSyntaxTree.convert(
+                result.getRootNode(), result.getRootNode().getLocality().getUri())));
   }
 
   private Map<String, LineRange> extractLineRange(List<DocumentSymbol> documentSymbols) {

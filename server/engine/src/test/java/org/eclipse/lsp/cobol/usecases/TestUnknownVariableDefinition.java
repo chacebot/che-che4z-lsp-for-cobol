@@ -33,7 +33,8 @@ class TestUnknownVariableDefinition {
           + "       PROGRAM-ID. THIS.\n"
           + "       DATA DIVISION.\n"
           + "       WORKING-STORAGE SECTION.\n"
-          + "       {_01  BLANK|1_}{|2|3}";
+          + "       {_01  BLANK|1_}{|2|3}\n"
+          + "       PROCEDURE DIVISION.";
 
   @Test
   void test() {

@@ -32,7 +32,9 @@ class TestTypingOccursDoesNotProduceNumberFormatException {
           + "        PROGRAM-ID. TEST1.\n"
           + "        DATA DIVISION.\n"
           + "        WORKING-STORAGE SECTION.\n"
-          + "        01 {$*A1|1} OCCURS{|2|3}\n";
+          + "        01 {$*A1|1} OCCURS{|2|3}\n"
+          + "        PROCEDURE DIVISION.";
+  ;
 
   @Test
   void test() {

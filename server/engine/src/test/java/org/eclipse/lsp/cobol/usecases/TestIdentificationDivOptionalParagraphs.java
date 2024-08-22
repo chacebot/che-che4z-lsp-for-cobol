@@ -25,19 +25,20 @@ class TestIdentificationDivOptionalParagraphs {
       "       IDENTIFICATION DIVISION.                                         \n"
           + "       PROGRAM-ID.                                                      \n"
           + "           DB102A.                                                      \n"
-          + "       AUTHOR.                                                          \n"
-          + "           FEDERAL COMPILER TESTING CENTER.                             \n"
-          + "       INSTALLATION.                                                    \n"
-          + "           GENERAL SERVICES ADMINISTRATION                              \n"
-          + "           AUTOMATED DATA AND TELECOMMUNICATION SERVICE.                \n"
-          + "           SOFTWARE DEVELOPMENT OFFICE.                                 \n"
-          + "           5203 LEESBURG PIKE  SUITE 1100                               \n"
-          + "           FALLS CHURCH VIRGINIA 22041.                                 \n"
+          + "       PROCEDURE DIVISION.                                              \n"
+          + "         AUTHOR.                                                        \n"
+          + "             FEDERAL COMPILER TESTING CENTER.                           \n"
+          + "         INSTALLATION.                                                  \n"
+          + "             GENERAL SERVICES ADMINISTRATION                            \n"
+          + "             AUTOMATED DATA AND TELECOMMUNICATION SERVICE.              \n"
+          + "             SOFTWARE DEVELOPMENT OFFICE.                               \n"
+          + "             5203 LEESBURG PIKE  SUITE 1100                             \n"
+          + "             FALLS CHURCH VIRGINIA 22041.                               \n"
           + "                                                                        \n"
-          + "           PHONE   (703) 756-6153                                       \n"
+          + "             PHONE   (703) 756-6153                                     \n"
           + "                                                                        \n"
-          + "           \" HIGH       \".                                              \n"
-          + "       DATE-WRITTEN.                                                    ";
+          + "             \" HIGH       \".                                          \n"
+          + "         DATE-WRITTEN.                                                  \n";
 
   @Test
   void test() {

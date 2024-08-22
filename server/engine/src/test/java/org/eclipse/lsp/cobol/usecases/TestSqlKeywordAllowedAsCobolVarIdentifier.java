@@ -28,6 +28,7 @@ class TestSqlKeywordAllowedAsCobolVarIdentifier {
           + "       Data Division.\n"
           + "       Working-Storage Section.\n"
           + "       01 {$*K} PIC 9(9).\n"
+          + "       PROCEDURE DIVISION.\n"
           + "       End program HELLO-WORLD.";
 
   @Test

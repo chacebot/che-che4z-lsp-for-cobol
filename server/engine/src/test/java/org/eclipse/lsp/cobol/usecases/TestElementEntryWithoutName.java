@@ -29,7 +29,9 @@ class TestElementEntryWithoutName {
           + "       Working-Storage Section.\n"
           + "       1 {$*PARENT}.\n"
           + "       2 pic x(11) value \n"
-          + "            'dfhcommarea'.\n";
+          + "            'dfhcommarea'.\n"
+          + "       PROCEDURE DIVISION.";
+  ;
 
   @Test
   void test() {

@@ -48,7 +48,9 @@ class Test88ThruHover {
           + "                              X'C0' THRU X'FF'.\n"
           + "          88 {$*BIT-THREE}   VALUE  X'80' THRU X'FF'.\n"
           + "          88 {$*BIT-FOUR} VALUES X'40'  THRU  X'7F'\n"
-          + "                              X'C0' THRU X'FF'.";
+          + "                              X'C0' THRU X'FF'.\n"
+          + "       PROCEDURE DIVISION.";
+  ;
   public static final String HOVER =
       "01 EIGHT-BITS PIC X.\n"
           + "  88 BIT-ONE VALUE IS X'80' THRU X'FF'.\n"
@@ -80,7 +82,8 @@ class Test88ThruHover {
         provider.getHover(
             new CobolDocumentModel("", "", result),
             new TextDocumentPositionParams(
-                new TextDocumentIdentifier(DOCUMENT_URI), new Position(4, 15)), documentGraph);
+                new TextDocumentIdentifier(DOCUMENT_URI), new Position(4, 15)),
+            documentGraph);
 
     Hover expected = new Hover(ImmutableList.of(Either.forRight(new MarkedString("cobol", HOVER))));
     assertEquals(expected, actual);

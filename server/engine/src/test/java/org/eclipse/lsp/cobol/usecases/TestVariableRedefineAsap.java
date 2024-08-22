@@ -50,7 +50,8 @@ class TestVariableRedefineAsap {
           + "                 10 {$*WS-YEAR} PIC X(4).\n"
           + "                 10 {$*WS-MONTH} PIC X(2).\n"
           + "                 10 {$*WS-DATE} PIC X(2).\n"
-          + "               05 {$*WS-DATE2} REDEFINES {$WS-DATE1} PIC 9(8).";
+          + "               05 {$*WS-DATE2} REDEFINES {$WS-DATE1} PIC 9(8).\n"
+          + "       PROCEDURE DIVISION.";
 
   private static final String CORRECT2 =
       "       IDENTIFICATION DIVISION.\n"
@@ -65,7 +66,8 @@ class TestVariableRedefineAsap {
           + "                                     PIC X OCCURS 100.\n"
           + "            03  {$*RIDBMSCOM}        REDEFINES {$IDBMSCOM-AREA}.\n"
           + "                05  {$*DB-SUB-ADDR}  PIC X(4).\n"
-          + "                05  {$*DB-SUB-FILLER}       PIC X(96).\n";
+          + "                05  {$*DB-SUB-FILLER}       PIC X(96).\n"
+          + "       PROCEDURE DIVISION.";
 
   @Test
   void testError() {
@@ -78,7 +80,7 @@ class TestVariableRedefineAsap {
                 new Range(),
                 "REDEFINES line must immediately follow redefined item: WS-DATA-A",
                 DiagnosticSeverity.Error,
-                 ErrorSource.PARSING.getText())));
+                ErrorSource.PARSING.getText())));
   }
 
   @Test

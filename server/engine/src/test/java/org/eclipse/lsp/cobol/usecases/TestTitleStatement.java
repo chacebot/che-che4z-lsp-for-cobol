@@ -57,14 +57,14 @@ class TestTitleStatement {
   @Test
   void testTitleWithNoTitleStatement() {
     UseCaseEngine.runTest(
-        TEXT1 + TITLE_WITHOUT_STMT + END,
+        TEXT1 + "          PROCEDURE DIVISION.\n" + TITLE_WITHOUT_STMT + END,
         ImmutableList.of(),
         ImmutableMap.of(
             "1",
             new Diagnostic(
                 new Range(),
-                "Syntax error on 'TITLE'",
-                DiagnosticSeverity.Error,
+                "The following token must start in Area A: TITLE",
+                DiagnosticSeverity.Warning,
                 ErrorSource.PARSING.getText())));
   }
 }

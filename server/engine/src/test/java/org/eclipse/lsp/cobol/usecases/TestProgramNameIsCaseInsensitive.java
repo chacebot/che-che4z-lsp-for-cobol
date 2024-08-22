@@ -26,6 +26,7 @@ class TestProgramNameIsCaseInsensitive {
   private static final String TEXT =
       "       IDENTIFICATION DIVISION.\n"
           + "       PROGRAM-ID. TEST1.\n"
+          + "       PROCEDURE DIVISION.\n"
           + "       END PROGRAM tEst1.\n";
 
   @Test

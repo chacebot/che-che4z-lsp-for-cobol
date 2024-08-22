@@ -36,7 +36,9 @@ class TestVariableRedefineSameGroup {
           + "          01 {$*WS-DESCRIPTION1}.\n"
           + "              05 {$*WS-DATE1} PIC X(20).\n"
           + "          01 {$*WS-DESCRIPTION2}.\n"
-          + "               05 {$*WS-DATE2} REDEFINES {WS-DATE1|1} PIC 9(8).";
+          + "               05 {$*WS-DATE2} REDEFINES {WS-DATE1|1} PIC 9(8).\n"
+          + "       PROCEDURE DIVISION.";
+  ;
 
   private static final String REDEFINE_SAME_GROUP_2 =
       "       IDENTIFICATION DIVISION.\n"
@@ -107,7 +109,9 @@ class TestVariableRedefineSameGroup {
           + "           03 {$*group-1}.\n"
           + "             05 {$*dataname-1} pic x.\n"
           + "           02 {$*group-2} redefines {$group-1}.\n"
-          + "             03 {$*dataname-2} pic 9.";
+          + "             03 {$*dataname-2} pic 9.\n"
+          + "       PROCEDURE DIVISION.";
+  ;
 
   private static final String HOWDY =
       "       01  {$*'XXX'-BALANCE-DUE^NEW-BALANCE-DUE}.\n"
@@ -131,7 +135,7 @@ class TestVariableRedefineSameGroup {
                 new Range(),
                 "REDEFINES line must immediately follow redefined item: WS-DATE1",
                 DiagnosticSeverity.Error,
-                 ErrorSource.PARSING.getText())));
+                ErrorSource.PARSING.getText())));
   }
 
   @Test
@@ -158,13 +162,13 @@ class TestVariableRedefineSameGroup {
                 new Range(),
                 "TEMPORARY-EMPLOYEE: Only 01, 66 and 77 level numbers are allowed at the highest level",
                 DiagnosticSeverity.Error,
-                 ErrorSource.PARSING.getText()),
+                ErrorSource.PARSING.getText()),
             "2",
             new Diagnostic(
                 new Range(),
                 "REDEFINES line must immediately follow redefined item: REGULAR-EMPLOYEE",
                 DiagnosticSeverity.Error,
-                 ErrorSource.PARSING.getText())));
+                ErrorSource.PARSING.getText())));
   }
 
   @Test

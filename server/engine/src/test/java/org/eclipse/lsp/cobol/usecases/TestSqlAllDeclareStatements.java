@@ -98,6 +98,7 @@ class TestSqlAllDeclareStatements {
 
   private static final String DECLARE_VARIABLE =
       TEXT
+          + "       PROCEDURE DIVISION.\n"
           + "           EXEC SQL \n"
           + "             DECLARE :{$FRED} VARIABLE CCSID EBCDIC FOR BIT DATA;\n"
           + "             DECLARE :{$JEAN} VARIABLE CCSID 1208;\n"

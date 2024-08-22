@@ -40,7 +40,7 @@ class TestParametrised {
   private static final String END_2 = "       01  {$*VAR}     PIC S9(4){|eof}";
 
   private static Stream<String> textsGetter() {
-    return Stream.of(END_1, END_2).map(end -> TEXT_START + end);
+    return Stream.of(END_1, END_2).map(end -> TEXT_START + end + "\n       PROCEDURE DIVISION.");
   }
 
   @ParameterizedTest
@@ -54,7 +54,7 @@ class TestParametrised {
             "eof",
             new Diagnostic(
                 new Range(),
-                    "A period was assumed before \"<EOF>\".",
+                "A period was assumed before \"<EOF>\".",
                 DiagnosticSeverity.Error,
                 ErrorSource.PARSING.getText())),
         CobolLanguageId.COBOL);
@@ -76,5 +76,4 @@ class TestParametrised {
                 ErrorSource.PARSING.getText())),
         CobolLanguageId.EXPERIMENTAL_COBOL);
   }
-
 }

@@ -34,7 +34,8 @@ class TestSqlIncludeStatementNotDefinedCorrectly {
           + "       DATA DIVISION.\n"
           + "       WORKING-STORAGE SECTION.\n"
           + "       01 {$*SQLCA} PIC X(10).\n"
-          + "           {EXEC|1} INCLUDE STRUCT1 END-EXEC.";
+          + "           {EXEC|1} INCLUDE STRUCT1 END-EXEC.\n"
+          + "       PROCEDURE DIVISION.";
 
   @Test
   void test() {
@@ -44,9 +45,7 @@ class TestSqlIncludeStatementNotDefinedCorrectly {
         ImmutableMap.of(
             "1",
             new Diagnostic(
-                new Range(), "Syntax error on 'EXEC'",
-                Error,
-                ErrorSource.PARSING.getText())),
+                new Range(), "Syntax error on 'EXEC'", Error, ErrorSource.PARSING.getText())),
         CobolLanguageId.COBOL);
   }
 
@@ -58,10 +57,7 @@ class TestSqlIncludeStatementNotDefinedCorrectly {
         ImmutableMap.of(
             "1",
             new Diagnostic(
-                new Range(), "Extraneous input 'EXEC'",
-                Error,
-                ErrorSource.PARSING.getText())),
+                new Range(), "Extraneous input 'EXEC'", Error, ErrorSource.PARSING.getText())),
         CobolLanguageId.EXPERIMENTAL_COBOL);
   }
-
 }

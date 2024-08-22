@@ -33,7 +33,8 @@ class TestIncomplete88DoesNotProduceNPE {
           + "       DATA DIVISION.\n"
           + "       WORKING-STORAGE SECTION.\n"
           + "       01  {$*A1} PIC 9.\n"
-          + "           88{|1}\n";
+          + "           88{|1}\n"
+          + "       PROCEDURE DIVISION.";
 
   @Test
   void test() {

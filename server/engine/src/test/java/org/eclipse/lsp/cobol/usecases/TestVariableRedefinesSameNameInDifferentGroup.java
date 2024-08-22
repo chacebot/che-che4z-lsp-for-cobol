@@ -33,7 +33,8 @@ class TestVariableRedefinesSameNameInDifferentGroup {
           + "              05 {$*WS-DATE2} REDEFINES {$WS-DATE1} PIC 9(8).\n"
           + "          01 {$*WS-DESCRIPTION2}.\n"
           + "              05 {$*WS-DATE1} PIC X(20).\n"
-          + "              05 {$*WS-DATE2} REDEFINES {$WS-DATE1} PIC 9(8).";
+          + "              05 {$*WS-DATE2} REDEFINES {$WS-DATE1} PIC 9(8).\n"
+          + "       PROCEDURE DIVISION.\n";
 
   @Test
   void testError() {

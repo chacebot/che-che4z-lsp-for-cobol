@@ -32,7 +32,8 @@ class TestExecVarDoesNotProduceNPE {
           + "       PROGRAM-ID. TEST1.\n"
           + "       DATA DIVISION.\n"
           + "       WORKING-STORAGE SECTION.\n"
-          + "       01 {$*EXEC|1}{|2}\n";
+          + "       01 {$*EXEC|1}{|2}\n"
+          + "       PROCEDURE DIVISION.";
 
   @Test
   void test() {

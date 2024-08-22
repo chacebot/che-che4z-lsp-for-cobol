@@ -44,7 +44,9 @@ class TestControlCompilerDirective {
       "       Identification Division.\n"
           + "       *CONTROL MA\n"
           + "      -{_P.|1_}\n"
-          + "       Program-Id. control-dir.";
+          + "       Program-Id. control-dir.\n"
+          + "       PROCEDURE DIVISION.";
+  ;
 
   @Test
   void testNoErrorOnControlCompilerDirective() {

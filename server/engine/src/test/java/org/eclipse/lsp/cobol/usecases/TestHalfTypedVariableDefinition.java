@@ -30,7 +30,8 @@ class TestHalfTypedVariableDefinition {
           + "       Program-id. HELLO-WORLD.\n"
           + "       DATA DIVISION.\n"
           + "       WORKING-STORAGE SECTION.\n"
-          + "       01 {$*COD-RETOUR} PIC X{(|1|2}66";
+          + "       01 {$*COD-RETOUR} PIC X{(|1|2}66\n"
+          + "       PROCEDURE DIVISION.";
 
   @Test
   void test() {

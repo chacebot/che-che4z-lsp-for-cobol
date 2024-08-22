@@ -21,25 +21,26 @@ import org.junit.jupiter.api.Test;
 
 /** Test repository paragraph statements */
 public class TestRepositoryParagraph {
-  private static final String TEXT = "       Identification division.\n"
-      + "       Program-id. \"SNDKAFKA\" is recursive.\n"
-      + "       Environment division.\n"
-      + "       Configuration section.\n"
-      + "       Special-Names.\n"
-      + "            Decimal-Point is comma.\n"
-      + "       Repository.\n"
-      + "           Class ZUtil         is \"com.ibm.jzos.ZUtil\"\n"
-      + "           Class JavaException is \"java.lang.Exception\"\n"
-      + "           Class jdbb          is \"java.nio.ByteBuffer\"\n"
-      + "           Class ToKafka       is \"CobolToKafka.ToKafka\"\n"
-      + "           Function FOO1\n"
-      + "           Function FOO2.\n"
-      + "       Input-output section.\n"
-      + "       Data Division.";
+  private static final String TEXT =
+      "       Identification division.\n"
+          + "       Program-id. \"SNDKAFKA\" is recursive.\n"
+          + "       Environment division.\n"
+          + "       Configuration section.\n"
+          + "       Special-Names.\n"
+          + "            Decimal-Point is comma.\n"
+          + "       Repository.\n"
+          + "           Class ZUtil         is \"com.ibm.jzos.ZUtil\"\n"
+          + "           Class JavaException is \"java.lang.Exception\"\n"
+          + "           Class jdbb          is \"java.nio.ByteBuffer\"\n"
+          + "           Class ToKafka       is \"CobolToKafka.ToKafka\"\n"
+          + "           Function FOO1\n"
+          + "           Function FOO2.\n"
+          + "       Input-output section.\n"
+          + "       Data Division.\n"
+          + "       Procedure Division.";
 
   @Test
   void test() {
     UseCaseEngine.runTest(TEXT, ImmutableList.of(), ImmutableMap.of());
   }
-
 }

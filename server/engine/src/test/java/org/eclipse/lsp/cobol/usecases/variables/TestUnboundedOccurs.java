@@ -19,18 +19,18 @@ import com.google.common.collect.ImmutableMap;
 import org.eclipse.lsp.cobol.test.engine.UseCaseEngine;
 import org.junit.jupiter.api.Test;
 
-/**
- * Occurs unbounded should not cause an error.
- */
+/** Occurs unbounded should not cause an error. */
 class TestUnboundedOccurs {
 
-  private static final String TEXT = "       IDENTIFICATION DIVISION.\n"
+  private static final String TEXT =
+      "       IDENTIFICATION DIVISION.\n"
           + "       PROGRAM-ID. Subscripts.\n"
           + "       DATA DIVISION.\n"
           + "       LINKAGE SECTION.\n"
           + "       01 {$*tab3}.\n"
           + "          05 {$*oc1} occurs unbounded.\n"
-          + "             10 {$*item} PIC X.";
+          + "             10 {$*item} PIC X.\n"
+          + "       PROCEDURE DIVISION.";
 
   @Test
   void test() {

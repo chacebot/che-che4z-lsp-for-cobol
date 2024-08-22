@@ -48,7 +48,7 @@ public class TestQualifiedNameUsageForLevel66 {
       "010000     66 {$*HARRY} RENAMES {$HARRY-A} THRU {$HARRY-B}.                       \n"
           + "       PROCEDURE DIVISION.\n"
           + "           IF       {$AL-BOB} OF {$A-GLOB}   EQUAL TO \"UUUUU\"      \n"
-          + "           MOVE     \"ssd\"       TO {$TOM}. ";
+          + "           MOVE     \"ssd\"       TO {$TOM}. \n";
   private static final String TEXT =
       PREFIX
           + "009900      66         {$*AL-BOB} RENAMES {$AL} IN {$A-GLOB} THRU {$BOB} OF {$A-GLOB}.  \n"
@@ -60,7 +60,9 @@ public class TestQualifiedNameUsageForLevel66 {
 
   private static final String TEXT3 =
       PREFIX
-          + "009900     66 {$*AL-BOB|1} RENAMES {$D-LEVEL} IN TOM THRU {$BOB} OF {$BB-LEVEL}.  \n";
+          + "009900     66 {$*AL-BOB|1} RENAMES {$D-LEVEL} IN TOM THRU {$BOB} OF {$BB-LEVEL}.  \n"
+          + "       PROCEDURE DIVISION.";
+  ;
 
   @Test
   void test() {
@@ -74,10 +76,15 @@ public class TestQualifiedNameUsageForLevel66 {
 
   @Test
   void test3() {
-    UseCaseEngine.runTest(TEXT3, ImmutableList.of(), ImmutableMap.of("1",
+    UseCaseEngine.runTest(
+        TEXT3,
+        ImmutableList.of(),
+        ImmutableMap.of(
+            "1",
             new Diagnostic(
-                    new Range(), "The data entry with the name TOM not found", DiagnosticSeverity.Error, ErrorSource.PARSING.getText())));
+                new Range(),
+                "The data entry with the name TOM not found",
+                DiagnosticSeverity.Error,
+                ErrorSource.PARSING.getText())));
   }
-
-
 }

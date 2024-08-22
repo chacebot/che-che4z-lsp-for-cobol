@@ -62,6 +62,7 @@ class TestCopybookReplacePatterns {
 
   private static final String TEXT5 =
       BASE
+          + "       PROCEDURE DIVISION. \n"
           + "       01  {$*LOGA}.  \r\n"
           + "       {_COPY {~REPL5}  \r\n"
           + "            REPLACING  ==LDAY== BY ==DMAN123000000000000000000000000000000005900\n"
@@ -80,7 +81,8 @@ class TestCopybookReplacePatterns {
           + "       {_COPY {~REPL7}  \r\n"
           + "            REPLACING  ==LDAY== BY ==DMAN123000000000000000000000000000000005900\n"
           + "      -    0000000000000000011111111111111111111111111111111111111111111\n"
-          + "      -    00000000000000000000000== .|2_}\r\n";
+          + "      -    00000000000000000000000== .|2_}\r\n"
+          + "      PROCEDURE DIVISION.";
 
   private static final String TEXT8 =
       BASE
@@ -178,12 +180,12 @@ class TestCopybookReplacePatterns {
                 "Variable name cannot exceed 30 characters",
                 DiagnosticSeverity.Error,
                 ErrorSource.PARSING.getText()),
-                "2",
-                new Diagnostic(
-                        new Range(),
-                        "Errors inside the copybook",
-                        DiagnosticSeverity.Error,
-                        ErrorSource.COPYBOOK.getText())));
+            "2",
+            new Diagnostic(
+                new Range(),
+                "Errors inside the copybook",
+                DiagnosticSeverity.Error,
+                ErrorSource.COPYBOOK.getText())));
   }
 
   @Test
@@ -204,12 +206,12 @@ class TestCopybookReplacePatterns {
                 "Variable name cannot exceed 30 characters",
                 DiagnosticSeverity.Error,
                 ErrorSource.PARSING.getText()),
-                "2",
-                new Diagnostic(
-                        new Range(),
-                        "Errors inside the copybook",
-                        DiagnosticSeverity.Error,
-                        ErrorSource.COPYBOOK.getText())));
+            "2",
+            new Diagnostic(
+                new Range(),
+                "Errors inside the copybook",
+                DiagnosticSeverity.Error,
+                ErrorSource.COPYBOOK.getText())));
   }
 
   @Test

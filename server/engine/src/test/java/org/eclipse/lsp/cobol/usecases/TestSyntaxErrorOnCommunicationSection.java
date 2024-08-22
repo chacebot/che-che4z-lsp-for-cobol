@@ -31,7 +31,8 @@ class TestSyntaxErrorOnCommunicationSection {
           + "         PROGRAM-ID. TEST1.\n"
           + "         DATA DIVISION.\n"
           + "         {COMMUNICATION|1} SECTION. \n"
-          + "         WORKING-STORAGE SECTION.";
+          + "         WORKING-STORAGE SECTION.\n"
+          + "         PROCEDURE DIVISION.";
 
   @Test
   void test() {
@@ -44,6 +45,6 @@ class TestSyntaxErrorOnCommunicationSection {
                 new Range(),
                 "Syntax error on 'COMMUNICATION'",
                 DiagnosticSeverity.Error,
-                 ErrorSource.PARSING.getText())));
+                ErrorSource.PARSING.getText())));
   }
 }

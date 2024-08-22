@@ -34,7 +34,9 @@ class TestVaryingSupportForFileAssignment {
           + "        DATA DIVISION. \n"
           + "        FILE SECTION.\n"
           + "        FD  {$*FICIN} \n"
-          + "           LABEL RECORDS ARE STANDARD. \n";
+          + "           LABEL RECORDS ARE STANDARD. \n"
+          + "       PROCEDURE DIVISION.";
+  ;
 
   @Test
   void test() {

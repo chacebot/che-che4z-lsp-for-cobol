@@ -32,7 +32,8 @@ class TestVariableDefinitionsAllowFILLER {
           + "              88 FILLER VALUE 'A'.\n"
           + "          01 {$*PARENT}.\n"
           + "              05 {$*CHILD} PIC 9.\n"
-          + "          66 FILLER RENAMES {$CHILD}.\n";
+          + "          66 FILLER RENAMES {$CHILD}.\n"
+          + "       PROCEDURE DIVISION.";
 
   @Test
   void test() {

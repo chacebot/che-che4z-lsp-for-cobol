@@ -248,7 +248,9 @@ class TestSqlAllRevokeStatements {
       "       IDENTIFICATION DIVISION.\n"
           + "       PROGRAM-ID. HELLO-SQL.\n"
           + "       DATA DIVISION.\n"
-          + "       WORKING-STORAGE SECTION.\n";
+          + "       WORKING-STORAGE SECTION.\n"
+          + "       PROCEDURE DIVISION.\n";
+  ;
 
   private static final String REVOKE_USE =
       TEXT

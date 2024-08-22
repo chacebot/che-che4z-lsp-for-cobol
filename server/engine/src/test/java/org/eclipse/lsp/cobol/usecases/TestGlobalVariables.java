@@ -75,6 +75,7 @@ class TestGlobalVariables {
           + "       Working-Storage Section.\n"
           + "       01 {$*FOO|1} GLOBAL POINTER.\n"
           + "       01 {$*FOO|1} GLOBAL POINTER.\n"
+          + "       PROCEDURE DIVISION.\n"
           + "       End Program 'P1'.";
 
   private static final String GLOBAL_ON_WRONG_LEVEL =
@@ -84,6 +85,7 @@ class TestGlobalVariables {
           + "       Working-Storage Section.\n"
           + "       01 {$*FOO}.\n"
           + "        05 {$*BAR|1} PIC X(10) GLOBAL.\n"
+          + "       PROCEDURE DIVISION.\n"
           + "       End Program 'P1'.";
 
   @Test
@@ -94,7 +96,10 @@ class TestGlobalVariables {
         ImmutableMap.of(
             "1",
             new Diagnostic(
-                new Range(), "Variable FOO is not defined", DiagnosticSeverity.Error,  ErrorSource.PARSING.getText())));
+                new Range(),
+                "Variable FOO is not defined",
+                DiagnosticSeverity.Error,
+                ErrorSource.PARSING.getText())));
   }
 
   @Test
@@ -113,7 +118,7 @@ class TestGlobalVariables {
                 new Range(),
                 "Global variable must have a unique name",
                 DiagnosticSeverity.Error,
-                 ErrorSource.PARSING.getText())));
+                ErrorSource.PARSING.getText())));
   }
 
   @Test
@@ -127,6 +132,6 @@ class TestGlobalVariables {
                 new Range(),
                 "GLOBAL can only be used on level 01",
                 DiagnosticSeverity.Error,
-                 ErrorSource.PARSING.getText())));
+                ErrorSource.PARSING.getText())));
   }
 }

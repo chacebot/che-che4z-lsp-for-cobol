@@ -19,19 +19,22 @@ import com.google.common.collect.ImmutableMap;
 import org.eclipse.lsp.cobol.test.engine.UseCaseEngine;
 import org.junit.jupiter.api.Test;
 
-/**
- * Test EXEC SQL in data definition section
- */
+/** Test EXEC SQL in data definition section */
 class TestSqlExecInDataSection {
-  private static final String TEXT_WHENEVER = "       IDENTIFICATION DIVISION.\n"
-          +          "       PROGRAM-ID. WE.\n"
-          +          "       ENVIRONMENT DIVISION.\n"
-          +          "       DATA DIVISION.\n"
-          +          "       WORKING-STORAGE SECTION.\n"
-          +          "           EXEC SQL \n"
-          +          "               WHENEVER SQLERROR GO TO 1000-ABEND-RTN \n" // FIXME 1000-ABEND-RTN should cause an error
-          +          "           END-EXEC.";
-  private static final String TEXT = "       IDENTIFICATION DIVISION.\n"
+  private static final String TEXT_WHENEVER =
+      "       IDENTIFICATION DIVISION.\n"
+          + "       PROGRAM-ID. WE.\n"
+          + "       ENVIRONMENT DIVISION.\n"
+          + "       DATA DIVISION.\n"
+          + "       WORKING-STORAGE SECTION.\n"
+          + "           EXEC SQL \n"
+          + "               WHENEVER SQLERROR GO TO 1000-ABEND-RTN \n" // FIXME 1000-ABEND-RTN
+          // should cause an error
+          + "           END-EXEC.\n"
+          + "       PROCEDURE DIVISION.";
+  ;
+  private static final String TEXT =
+      "       IDENTIFICATION DIVISION.\n"
           + "       PROGRAM-ID. SQLISSUE.\n"
           + "       ENVIRONMENT DIVISION.\n"
           + "       DATA DIVISION.\n"
@@ -43,12 +46,15 @@ class TestSqlExecInDataSection {
           + "           03  {$*A} PIC X(8).\n"
           + "           EXEC SQL\n"
           + "               END DECLARE SECTION\n"
-          + "           END-EXEC.\n";
+          + "           END-EXEC.\n"
+          + "       PROCEDURE DIVISION.";
+  ;
 
   @Test
   void test() {
     UseCaseEngine.runTest(TEXT, ImmutableList.of(), ImmutableMap.of());
   }
+
   @Test
   void testWhenever() {
     UseCaseEngine.runTest(TEXT_WHENEVER, ImmutableList.of(), ImmutableMap.of());

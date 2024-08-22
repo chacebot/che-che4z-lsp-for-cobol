@@ -45,25 +45,29 @@ public class TestFDRecordContainsClause {
       BASE
           + "002700     RECORD IS VARYING IN SIZE TO 4096 CHARACTERS                 00002700\n"
           + "002800     DATA RECORD IS {$AAAAAAAAAA}.                                   00002800\n"
-          + "       01 {$*AAAAAAAAAA} PIC 9(2).\n";
+          + "       01 {$*AAAAAAAAAA} PIC 9(2).\n"
+          + "002900 PROCEDURE DIVISION.";
 
   private static final String TEXT2 =
       BASE
           + "002700     RECORD IS VARYING IN SIZE FROM 4096 CHARACTERS           \n"
           + "002800     DATA RECORD IS {$AAAAAAAAAA}.                                   00002800\n"
-          + "       01 {$*AAAAAAAAAA} PIC 9(2).\n";
+          + "       01 {$*AAAAAAAAAA} PIC 9(2).\n"
+          + "002900 PROCEDURE DIVISION.";
 
   private static final String TEXT3 =
       BASE
           + "002700     RECORD IS VARYING IN SIZE FROM 4096 TO 9192 CHARACTERS \n"
           + "002800     DATA RECORD IS {$AAAAAAAAAA}.                                   00002800\n"
-          + "       01 {$*AAAAAAAAAA} PIC 9(2).\n";
+          + "       01 {$*AAAAAAAAAA} PIC 9(2).\n"
+          + "002900 PROCEDURE DIVISION.";
 
   private static final String TEXT4 =
       BASE
           + "002700     RECORD IS VARYING IN SIZE 4096 CHARACTERS \n"
           + "002800     DATA RECORD IS {$AAAAAAAAAA}.                                   00002800\n"
-          + "       01 {$*AAAAAAAAAA} PIC 9(2).\n";
+          + "       01 {$*AAAAAAAAAA} PIC 9(2).\n"
+          + "002900 PROCEDURE DIVISION.";
 
   public static final String TEXT5 =
       BASE
@@ -71,7 +75,9 @@ public class TestFDRecordContainsClause {
           + "           {BLOCK|1} CONTAINS 0 RECORDS\n"
           + "           LABEL RECORDS are OMITTED.\n"
           + "       01 CARD_ABC_FIELD.\n"
-          + "           05 A-FIELD pic x(9).";
+          + "           05 A-FIELD pic x(9).\n"
+          + "002600 PROCEDURE DIVISION.";
+  ;
 
   @Test
   void test() {

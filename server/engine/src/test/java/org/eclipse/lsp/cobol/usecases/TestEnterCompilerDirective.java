@@ -29,22 +29,30 @@ class TestEnterCompilerDirective {
   private static final String TEXT =
       "       Identification Division.\n"
           + "       ENTER ABC.\n"
-          + "       Program-Id. control-dir.";
+          + "       Program-Id. control-dir.\n"
+          + "       PROCEDURE DIVISION.";
+  ;
 
   private static final String TEXT_COBOL =
       "       Identification Division.\n"
           + "       ENTER COBOL.\n"
-          + "       Program-Id. control-dir.";
+          + "       Program-Id. control-dir.\n"
+          + "       PROCEDURE DIVISION.";
+  ;
 
   private static final String TEXT_NO_LANGUAGE =
       "       Identification Division.\n"
           + "       {_ENTER .|1_}\n"
-          + "       Program-Id. control-dir.";
+          + "       Program-Id. control-dir.\n"
+          + "       PROCEDURE DIVISION.";
+  ;
 
   private static final String TEXT_JAVA_LANG_ROUTINE =
       "       Identification Division.\n"
           + "       ENTER JAVA ROUTINE .\n"
-          + "       Program-Id. control-dir.";
+          + "       Program-Id. control-dir.\n"
+          + "       PROCEDURE DIVISION.";
+  ;
 
   @Test
   void testNoErrorOnEnterCompilerDirective() {

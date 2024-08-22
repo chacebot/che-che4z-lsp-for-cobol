@@ -50,7 +50,8 @@ class TestRemarksAreUnsupported {
           + "\n"
           + "      ******************************************************************\n"
           + "\n"
-          + "       ENVIRONMENT DIVISION.";
+          + "       ENVIRONMENT DIVISION.\n"
+          + "       PROCEDURE DIVISION.";
 
   @Test
   void test() {

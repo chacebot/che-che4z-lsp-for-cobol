@@ -79,7 +79,8 @@ public class TestSymbolVariableName {
         ImmutablePair.of("extend", ""),
         ImmutablePair.of("first", ""),
         ImmutablePair.of("initial", ""),
-//        ImmutablePair.of("national", ""), TODO: The "PICTURE" clause in the data definition was not compatible with the specified "USAGE NATIONAL"
+        //        ImmutablePair.of("national", ""), TODO: The "PICTURE" clause in the data
+        // definition was not compatible with the specified "USAGE NATIONAL"
         ImmutablePair.of("object", "Missing token REFERENCE at usageFormat"),
         ImmutablePair.of("off", ""),
         ImmutablePair.of("quote", ""),
@@ -128,7 +129,7 @@ public class TestSymbolVariableName {
               "3",
               new Diagnostic(
                   new Range(),
-                  String.format("Syntax error on '%s'", keyword.getLeft()),
+                  String.format("No viable alternative at input %s", keyword.getLeft()),
                   DiagnosticSeverity.Error,
                   ErrorSource.PARSING.getText()));
     }

@@ -40,7 +40,9 @@ class TestRemarksSectionIsUnsupported {
           + "              PURPOSE.\n"
           + "              THIS PROGRAM IS DEFINED TO TEST A NUMBER OF THE\n"
           + "              APPLICATION TESTING COLLECTION AND DEBUG TOOL FUNCTIONS\n"
-          + "       ENVIRONMENT DIVISION.";
+          + "       ENVIRONMENT DIVISION.\n"
+          + "       PROCEDURE DIVISION.";
+  ;
 
   @Test
   void test() {

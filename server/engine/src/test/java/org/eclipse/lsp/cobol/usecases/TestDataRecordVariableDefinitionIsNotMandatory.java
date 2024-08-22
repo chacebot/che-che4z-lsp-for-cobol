@@ -43,7 +43,8 @@ public class TestDataRecordVariableDefinitionIsNotMandatory {
       BASE_TEXT
           + "           DATA RECORD IS WHATEVER.                     \n"
           + "       01  {$*UNRELATED-STUFF}.                             \n"
-          + "           05  {$*AAAA-KEY}         PIC X(1234).   \n";
+          + "           05  {$*AAAA-KEY}         PIC X(1234).   \n"
+          + "       PROCEDURE DIVISION.";
 
   public static final String TEXT_DATA_RECORD_VARIABLE_IS_DEFINED =
       BASE_TEXT
@@ -51,15 +52,19 @@ public class TestDataRecordVariableDefinitionIsNotMandatory {
           + "       01  {$*UNRELATED-STUFF}.                             \n"
           + "           05  {$*AAAA-KEY}         PIC X(1234).   \n"
           + "       WORKING-STORAGE SECTION.\n"
-          + "       01  {$*WHATEVER}           PIC X(10).";
+          + "       01  {$*WHATEVER}           PIC X(10).\n"
+          + "       PROCEDURE DIVISION.";
+  ;
 
   @Test
   void testDataRecordVariableNeedNotBeDefined() {
-    UseCaseEngine.runTest(TEXT_DATA_RECORD_VARIABLE_NOT_DEFINED, ImmutableList.of(), ImmutableMap.of());
+    UseCaseEngine.runTest(
+        TEXT_DATA_RECORD_VARIABLE_NOT_DEFINED, ImmutableList.of(), ImmutableMap.of());
   }
 
   @Test
   void testWhenDataRecordVariableIsDefinedUsageIsCorrectlyReflected() {
-    UseCaseEngine.runTest(TEXT_DATA_RECORD_VARIABLE_IS_DEFINED, ImmutableList.of(), ImmutableMap.of());
+    UseCaseEngine.runTest(
+        TEXT_DATA_RECORD_VARIABLE_IS_DEFINED, ImmutableList.of(), ImmutableMap.of());
   }
 }
