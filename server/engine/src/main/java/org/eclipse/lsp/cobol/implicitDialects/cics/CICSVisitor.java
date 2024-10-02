@@ -91,12 +91,13 @@ class CICSVisitor extends CICSParserBaseVisitor<List<Node>> {
     areaBWarning(ctx);
     changeContextToDialectStatement(ctx);
     if (ctx.stop.getType() != CICSLexer.END_EXEC) {
-      SyntaxError error = SyntaxError.syntaxError()
-          .errorSource(ErrorSource.PARSING)
-          .location(getTokenEndLocality(ctx.stop).toOriginalLocation())
-          .suggestion(messageService.getMessage("cicsParser.missingEndExec"))
-          .severity(ErrorSeverity.ERROR)
-          .build();
+      SyntaxError error =
+          SyntaxError.syntaxError()
+              .errorSource(ErrorSource.PARSING)
+              .location(getTokenEndLocality(ctx.stop).toOriginalLocation())
+              .suggestion(messageService.getMessage("cicsParser.missingEndExec"))
+              .severity(ErrorSeverity.ERROR)
+              .build();
       errors.add(error);
     }
 
@@ -163,22 +164,15 @@ class CICSVisitor extends CICSParserBaseVisitor<List<Node>> {
 
   @Override
   public List<Node> visitAllExciRules(CICSParser.AllExciRulesContext ctx) {
-    // TODO: uncomment and adjust below when we decide to support this feature based on compiler
-    // directive
-    //    boolean isExciModeEnabled = context
-    //            .getConfig()
-    //            .getCompilerOptions()
-    //            .stream()
-    //            .anyMatch(str -> str.equalsIgnoreCase("EXCI"));
-    //    if (!isExciModeEnabled) {
-    //      Locality tokenLocality = getTokenLocality(ctx.start);
-    //      errors.add(SyntaxError.syntaxError()
-    //              .errorSource(ErrorSource.PARSING)
-    //              .location(tokenLocality.toOriginalLocation())
-    //              .suggestion(messageService.getMessage("cics.exci.errormessage"))
-    //              .severity(ErrorSeverity.WARNING)
-    //              .build());
-    //    }
+
+    cicsOptionsCheckUtility.setExciOptionsEnabled(
+        context.getConfig().getCompilerOptions().stream()
+            .anyMatch(str -> str.equalsIgnoreCase("EXCI")));
+
+    cicsOptionsCheckUtility.setSpOptionsEnabled(
+        context.getConfig().getCompilerOptions().stream()
+            .anyMatch(str -> str.equalsIgnoreCase("SP")));
+
     return visitChildren(ctx);
   }
 
@@ -314,9 +308,7 @@ class CICSVisitor extends CICSParserBaseVisitor<List<Node>> {
         new Position(ctx.start.getLine() - 1, ctx.start.getCharPositionInLine()),
         new Position(
             ctx.stop.getLine() - 1,
-            ctx.stop.getCharPositionInLine()
-                + ctx.stop.getStopIndex()
-                - ctx.stop.getStartIndex()));
+            ctx.stop.getCharPositionInLine() + ctx.stop.getStopIndex() - ctx.stop.getStartIndex()));
   }
 
   public Range constructRange(TerminalNode ctx) {
@@ -398,7 +390,10 @@ class CICSVisitor extends CICSParserBaseVisitor<List<Node>> {
   }
 
   public Range buildTokenEndRange(Token token) {
-    Position p = new Position(token.getLine() - 1, token.getCharPositionInLine() + token.getStopIndex() - token.getStartIndex() + 1);
+    Position p =
+        new Position(
+            token.getLine() - 1,
+            token.getCharPositionInLine() + token.getStopIndex() - token.getStartIndex() + 1);
     return new Range(p, p);
   }
 }

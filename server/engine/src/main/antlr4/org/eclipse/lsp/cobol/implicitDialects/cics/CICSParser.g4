@@ -22,7 +22,7 @@ allCicsRule: cics_send | cics_receive | cics_add | cics_address | cics_allocate 
                        cics_build | cics_cancel | cics_change | cics_change_task | cics_check | cics_connect | cics_converttime |
                        cics_define | cics_delay | cics_delete | cics_deleteq | cics_deq | cics_document | cics_dump | cics_endbr |
                        cics_endbrowse | cics_enq | cics_enter | cics_extract | cics_force | cics_formattime | cics_free |
-                       cics_freemain | cics_gds | cics_get | cics_getmain | cics_getnext | cics_handle | cics_ignore | cics_inquire |
+                       cics_freemain | cics_gds | cics_get | cics_getmain | cics_getnext | cics_handle | cics_ignore | cics_inquire_application | cics_inquire_system |
                        cics_invoke | cics_issue | cics_link | cics_load | cics_monitor | cics_move | cics_point | cics_pop |
                        cics_post | cics_purge | cics_push | cics_put | cics_query | cics_read | cics_readnext |
                        cics_readq | cics_release | cics_remove | cics_reset | cics_resetbr | cics_resume | cics_retrieve |
@@ -438,31 +438,26 @@ pf_option: PF1 | PF2 | PF3 | PF4 | PF5 | PF6 | PF7 | PF8 | PF9 | PF10 | PF11 | P
 /** IGNORE CONDITION */
 cics_ignore: IGNORE CONDITION (cics_conditions | cicsWord | cics_handle_response)+;
 
-/** INQUIRE ACTIVITYID / CONTAINER / EVENT / PROCESS / TIMER */
-cics_inquire: INQUIRE (cics_inquire_activityid | cics_inquire_container | cics_inquire_event | cics_inquire_process |
-              cics_inquire_timer | cics_inquire_urimap);
-cics_inquire_activityid: ACTIVITYID cics_data_value (ABCODE cics_data_area | ABPROGRAM cics_data_area |
-                         ACTIVITY cics_data_area | COMPSTATUS cics_cvda | EVENT cics_data_area | MODE cics_cvda |
-                         PROCESS cics_data_area | PROCESSTYPE cics_data_area | PROGRAM cics_data_area |
-                         SUSPSTATUS cics_cvda | TRANSID cics_data_area | USERID cics_data_area | cics_handle_response)*;
-cics_inquire_container: CONTAINER cics_data_value (ACTIVITYID cics_data_value | PROCESS cics_data_value PROCESSTYPE
-                        cics_data_value | DATALENTH cics_data_area | SET cics_data_area | cics_handle_response)*;
-cics_inquire_event: EVENT cics_data_value (ACTIVITYID cics_data_value | EVENTTYPE cics_cvda | FIRESTATUS cics_cvda |
-                    COMPOSITE cics_data_area | PREDICATE cics_cvda | TIMER cics_data_area | cics_handle_response)*;
-cics_inquire_process: PROCESS cics_data_value (PROCESSTYPE cics_data_value | ACTIVITYID cics_data_area | cics_handle_response)+;
-cics_inquire_timer: TIMER cics_data_value (ACTIVITYID cics_data_value | EVENT cics_data_area | STATUS cics_cvda |
-                    ABSTIME cics_data_area | cics_handle_response)*;
+/** INQUIRE, Application Commands ACTIVITYID / CONTAINER / EVENT / PROCESS / TIMER */
+cics_inquire_application: INQUIRE (cics_inquire_activityid | cics_inquire_container | cics_inquire_event | cics_inquire_process | cics_inquire_timer);
+cics_inquire_activityid: (ACTIVITYID cics_data_value | (COMPSTATUS | MODE | SUSPSTATUS) cics_cvda |
+                         (ABCODE | ABPROGRAM | ACTIVITY | EVENT | PROCESS | PROCESSTYPE | PROGRAM | TRANSID | USERID) cics_data_area | cics_handle_response)+;
+cics_inquire_container: ((CONTAINER | ACTIVITYID | PROCESS | PROCESSTYPE) cics_data_value | (DATALENTH | SET) cics_data_area | cics_handle_response)+;
+cics_inquire_event: ((EVENT | ACTIVITYID) cics_data_value | (EVENTTYPE | FIRESTATUS | PREDICATE) cics_cvda | (COMPOSITE | TIMER) cics_data_area | cics_handle_response)+;
+cics_inquire_process: ((PROCESS | PROCESSTYPE) cics_data_value | ACTIVITYID cics_data_area | cics_handle_response)+;
+cics_inquire_timer: ((TIMER | ACTIVITYID) cics_data_value | (EVENT | ABSTIME) cics_data_area| STATUS cics_cvda | cics_handle_response)+;
 
-/** Ref: https://www.ibm.com/docs/en/cics-ts/6.1?topic=commands-inquire-urimap */
-cics_inquire_urimap: URIMAP cics_data_value (cics_inquire_urimap_data_val_args | cics_inquire_urimap_data_area_args | cics_inquire_urimap_data_cvda_args)*;
-cics_inquire_urimap_data_val_args:(APPLICATION | APPLMAJORVER | APPLMINORVER | APPLMICROVER | OPERATION | PLATFORM) cics_data_value;
-cics_inquire_urimap_data_area_args:(ATOMSERVICE | CERTIFICATE | CHANGEAGREL | CHANGETIME | CHANGEUSRID | CHARACTERSET |
-                                CIPHERS | CONVERTER | DEFINESOURCE | DEFINETIME | HFSFILE | HOST | HOSTCODEPAGE |
-                                INSTALLTIME | INSTALLUSRID | IPRESOLVED | LOCATION | MEDIATYPE | NUMCIPHERS | PATH |
-                                PIPELINE | PORT | PROGRAM | SOCKETCLOSE | SOCKPOOLSIZE | TCPIPSERVICE | TEMPLATENAME |
-                                TRANSACTION | USERID | WEBSERVICE) cics_data_area;
-cics_inquire_urimap_data_cvda_args: (ANALYZERSTAT | AUTHENTICATE | AVAILSTATUS | CHANGEAGENT | ENABLESTATUS | HOSTTYPE |
-                                 INSTALLAGENT | IPFAMILY | REDIRECTTYPE | SCHEME | USAGE) cics_cvda;
+/** INQUIRE, System Commands */
+cics_inquire_system: INQUIRE (cics_inquire_urimap);
+cics_inquire_association: (ASSOCIATION cics_data_value | (ACAPPLNAME | ACMAJORVER | ACMICROVER | ACMINORVER | ACOPERNAME | ACPLATNAME | APPLDATA | APPLID | CLIENTIPADDR | CLIENTLOC
+                                                                     | CLIENTPORT | DNAME | FACILNAME | INITUSERID | IPCONN | LUNAME | MVSIMAGE | NETID | ODADPTRID | ODADPTRDATA1
+                                                                     | ODADPTRDATA2 | ODADPTRDATA3 | ODAPPLID | ODCLNTPORT | ODFACILNAME | ODLUNAME | ODNETID | ODNETWORKID | ODSERVERPORT | ODSTARTTIME
+                                                                     | ODTASKID | ODTCPIPS | ODTRANSID | ODUSERID | PHAPPLID | PHCOUNT | PHNETWORKID | PHSTARTTIME | PHTASKID | PHTRANSID | PROGRAM | PTCOUNT | PTSTARTTIME
+                                                                     | PTTASKID | PTTRANSID | REALM | SERVERIPADDR | SERVERPORT | STARTTIME | TCPIPJOB | TCPIPSERVICE | TCPIPZONE | TRNGRPID | TRANSACTION | USERCORRDATA | USERID) cics_data_area
+                                                                     | (CLNTIPFAMILY | FACILTYPE | IPFAMILY | ODFACILTYPE | ODIPFAMILY | SRVRIPFAMILY) cics_cvda | cics_handle_response)+;
+
+cics_inquire_urimap: (URIMAP cics_data_value cics_handle_response)+;
+
 
 /** INVOKE SERVICE */
 cics_invoke: INVOKE (SERVICE cics_data_value | CHANNEL cics_data_value | OPERATION cics_data_value | URI cics_data_value |
@@ -936,14 +931,15 @@ cicsWords
     | cicsTranslatorCompileDirectivedKeywords
     ;
 
-cicsLexerDefinedVariableUsageTokens: ABCODE | ABDUMP | ABEND | ABORT | ABPROGRAM | ABSTIME | ACCUM | ACEE | ACQACTIVITY
-    | ACQPROCESS | ACQUACTIVITY | ACTION | ACTIVITY | ACTIVITYID | ACTPARTN | AID | ALARM | ALTSCRNHT | ALTSCRNWD
-    | ANYKEY | APLKYBD | APLTEXT | APPLID | AS | ASA | ASIS | ASKTIME | ASRAINTRPT | ASRAKEY | ASRAPSW | ASRAREGS | ASRASPC
-    | ASRASTG | ASYNCHRONOUS | ATTACHID | ATTRIBUTES | AUTHENTICATE | AUTOPAGE | AUXILIARY | BASE64
+cicsLexerDefinedVariableUsageTokens: ABCODE | ABDUMP | ABEND | ABORT | ABPROGRAM | ABSTIME | ACAPPLNAME | ACCUM | ACEE | ACMAJORVER
+    | ACMICROVER | ACMINORVER | ACOPERNAME | ACPLATNAME
+    | ACQACTIVITY | ACQPROCESS | ACQUACTIVITY | ACTION | ACTIVITY | ACTIVITYID | ACTPARTN | AID | ALARM | ALTSCRNHT | ALTSCRNWD
+    | ANYKEY | APLKYBD | APLTEXT | APPLDATA | APPLID | AS | ASA | ASIS | ASKTIME | ASRAINTRPT | ASRAKEY | ASRAPSW | ASRAREGS | ASRASPC
+    | ASRASTG | ASYNCHRONOUS | ATTACH | ATTACHID | ATTRIBUTES | AUTHENTICATE | AUTOPAGE | AUXILIARY | BASE64
     | BASICAUTH | BELOW | BIF | BODYCHARSET | BOOKMARK | BRDATA | BRDATALENGTH | BREXIT | BRIDGE | BROWSETOKEN
     | BTRANS | BUFFER | BUILD | CADDRLENGTH | CARD | CBUFF | CCSID | CERTIFICATE | CHANGE | CHANGETIME
     | CHANNEL | CHAR | CHARACTERSET | CHECK | CHUNKEND | CHUNKING | CHUNKNO | CHUNKYES | CICSDATAKEY | CIPHERS | CLEAR
-    | CLICONVERT | CLIENT | CLIENTADDR | CLIENTADDRNU | CLIENTCONV | CLNTCODEPAGE | CLIENTNAME | CLNTADDR6NU | CLNTIPFAMILY
+    | CLICONVERT | CLIENT | CLIENTADDR | CLIENTADDRNU | CLIENTCONV | CLIENTIPADDR | CLNTCODEPAGE | CLIENTNAME | CLNTADDR6NU | CLNTIPFAMILY
     | CLOSESTATUS | CLRPARTN | CMDSEC | CNAMELENGTH | CNOTCOMPL | CODEPAGE | COLOR | COMMAREA | COMMONNAME
     | COMMONNAMLEN | COMPAREMAX | COMPAREMIN | COMPLETE | COMPOSITE | COMPSTATUS | CONFIRM | CONFIRMATION | CONNECT
     | CONSISTENT | CONSOLE | CONTAINER | CONTEXTTYPE | CONVDATA | CONVERSE | CONVERTST | CONVERTTIME | CONVID
