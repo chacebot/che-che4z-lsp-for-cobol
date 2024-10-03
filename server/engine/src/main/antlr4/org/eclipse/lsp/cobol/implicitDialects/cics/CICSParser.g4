@@ -448,7 +448,7 @@ cics_inquire_process: ((PROCESS | PROCESSTYPE) cics_data_value | ACTIVITYID cics
 cics_inquire_timer: ((TIMER | ACTIVITYID) cics_data_value | (EVENT | ABSTIME) cics_data_area| STATUS cics_cvda | cics_handle_response)+;
 
 /** INQUIRE, System Commands */
-cics_inquire_system: INQUIRE (cics_inquire_association | cics_inquire_association_list | cics_inquire_atomservice | cics_inquire_autinstmodel | cics_inquire_autoinstall | cics_inquire_brfacility | cics_inquire_bundle);
+cics_inquire_system: INQUIRE (cics_inquire_association | cics_inquire_association_list | cics_inquire_atomservice | cics_inquire_autinstmodel | cics_inquire_autoinstall | cics_inquire_brfacility | cics_inquire_bundle | cics_inquire_bundlepart | cics_inquire_capdatapred);
 cics_inquire_association: (ASSOCIATION cics_data_value | (ACAPPLNAME | ACMAJORVER | ACMICROVER | ACMINORVER | ACOPERNAME | ACPLATNAME | APPLDATA | APPLID | CLIENTIPADDR | CLIENTLOC
                                                                      | CLIENTPORT | DNAME | FACILNAME | INITUSERID | IPCONN | LUNAME | MVSIMAGE | NETID | ODADPTRDATA1
                                                                      | ODADPTRDATA2 | ODADPTRDATA3 | ODADPTRID| ODAPPLID | ODCLNTPORT | ODFACILNAME | ODLUNAME | ODNETID | ODNETWORKID | ODSERVERPORT | ODSTARTTIME
@@ -465,9 +465,11 @@ cics_inquire_atomservice: (ATOMSERVICE cics_data_value | (ATOMTYPE | CHANGEAGENT
 cics_inquire_autinstmodel: (AUTINSTMODEL cics_data_value | cics_handle_response)+;
 cics_inquire_autoinstall: (AUTOINSTALL | (AIBRIDGE | CONSOLES | ENABLESTATUS) cics_cvda | (CURREQS | MAXREQS | PROGRAM) cics_data_area | cics_handle_response)+;
 cics_inquire_brfacility: (BRFACILITY cics_data_value | (KEEPTIME | LINKSYSTEM | LINKSYSNET | NETNAME | REMOTESYSNET | REMOTESYSTEM | TASKID | TERMID | TRANSACTION) cics_data_area | (NAMESPACE | TERMSTATUS) cics_cvda | cics_handle_response)+;
-
 cics_inquire_bundle: ((BUNDLE | BUNDLEID | MAJORVERSION | MGMTPART | MICROVERSION | MINORVERSION) cics_data_value | (AVAILSTATUS | CHANGEAGENT | ENABLESTATUS | INSTALLAGENT) cics_cvda |
                       (BASESCOPE | BUNDLEDIR | CHANGEAGREL | CHANGETIME | CHANGEUSRID | DEFINESOURCE | DEFINETIME | ENABLEDCOUNT | INSTALLTIME | INSTALLUSRID | PARTCOUNT | TARGETCOUNT) | cics_handle_response)+;
+
+cics_inquire_bundlepart: ((BUNDLEPART | METADATAFILE | PARTTYPE cics_data_area) | BUNDLE cics_data_value | (AVAILSTATUS | ENABLESTATUS | PARTCLASS) cics_cvda | cics_handle_response)+;
+cics_inquire_capdatapred: (CAPDATAPRED | (CAPTURESPEC | EVENTBINDING) cics_data_value | (CONTAINER | FIELDLENGTH | FIELDOFFSET | FILENAME | FILTERVALUE | LOCATION | STRUCTNAME | VARIABLENAME) cics_data_area | OPERATOR cics_cvda | cics_handle_response)+;
 
 
 
@@ -1017,7 +1019,10 @@ cicsLexerDefinedVariableUsageTokens:
 	| BUNDLE
 	| BUNDLEDIR
 	| BUNDLEID
+	| BUNDLEPART
 	| CADDRLENGTH
+	| CAPDATAPRED
+	| CAPTURESPEC
 	| CARD
 	| CBUFF
 	| CCSID
@@ -1169,6 +1174,7 @@ cicsLexerDefinedVariableUsageTokens:
 	| ESMREASON
 	| ESMRESP
 	| EVENT
+	| EVENTBINDING
 	| EVENTTYPE
 	| EVENTUAL
 	| EWASUPP
@@ -1190,6 +1196,9 @@ cicsLexerDefinedVariableUsageTokens:
 	| FCI
 	| FCT
 	| FIELD
+	| FIELDLENGTH
+	| FILENAME
+	| FILTERVALUE
 	| FIRESTATUS
 	| FLENGTH
 	| FMH
@@ -1274,7 +1283,7 @@ cicsLexerDefinedVariableUsageTokens:
 	| JUSTIFY
 	| KATAKANA
 	| KEEP
-	| KEEPTIME 
+	| KEEPTIME
 	| KEYLENGTH
 	| KEYNUMBER
 	| L40
@@ -1306,6 +1315,7 @@ cicsLexerDefinedVariableUsageTokens:
 	| LOCALCCSID
 	| LOCALITY
 	| LOCALITYLEN
+	| LOCATION
 	| LOGMESSAGE
 	| LOGMODE
 	| LOGONLOGMODE
@@ -1337,6 +1347,7 @@ cicsLexerDefinedVariableUsageTokens:
 	| MEDIATYPE
 	| MESSAGEID
 	| METADATA
+	| METADATAFILE
 	| METADATALEN
 	| METHODLENGTH
 	| MGMTPART
@@ -1440,6 +1451,7 @@ cicsLexerDefinedVariableUsageTokens:
 	| PAGE_COUNTER
 	| PAGING
 	| PARSE
+	| PARTCLASS
 	| PARTCOUNT
 	| PARTN
 	| PARTNER
@@ -1447,6 +1459,7 @@ cicsLexerDefinedVariableUsageTokens:
 	| PARTNPAGE
 	| PARTNS
 	| PARTNSET
+	| PARTTYPE
 	| PASS
 	| PASSBK
 	| PASSWORDLEN
@@ -1642,6 +1655,7 @@ cicsLexerDefinedVariableUsageTokens:
 	| STORAGE
 	| STRFIELD
 	| STRINGFORMAT
+	| STRUCTNAME
 	| SUBADDR
 	| SUBCODELEN
 	| SUBCODESTR
@@ -1730,6 +1744,7 @@ cicsLexerDefinedVariableUsageTokens:
 	| USERPRIORITY
 	| VALIDATION
 	| VALUELENGTH
+	| VARIABLENAME
 	| VERIFY
 	| VERSIONLEN
 	| VOLUME
