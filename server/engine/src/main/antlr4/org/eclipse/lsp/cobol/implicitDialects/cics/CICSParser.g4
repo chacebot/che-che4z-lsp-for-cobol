@@ -1276,6 +1276,7 @@ cicsLexerDefinedVariableUsageTokens:
 	| INVPARTN
 	| INVREQ
 	| IPCONN
+	| IPFAMILY
 	| ISSUE
 	| ISSUER
 	| ITEM
