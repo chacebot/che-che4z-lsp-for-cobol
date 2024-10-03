@@ -448,7 +448,8 @@ cics_inquire_process: ((PROCESS | PROCESSTYPE) cics_data_value | ACTIVITYID cics
 cics_inquire_timer: ((TIMER | ACTIVITYID) cics_data_value | (EVENT | ABSTIME) cics_data_area| STATUS cics_cvda | cics_handle_response)+;
 
 /** INQUIRE, System Commands */
-cics_inquire_system: INQUIRE (cics_inquire_association | cics_inquire_association_list | cics_inquire_atomservice | cics_inquire_autinstmodel | cics_inquire_autoinstall | cics_inquire_brfacility | cics_inquire_bundle | cics_inquire_bundlepart | cics_inquire_capdatapred);
+cics_inquire_system: INQUIRE (cics_inquire_association | cics_inquire_association_list | cics_inquire_atomservice | cics_inquire_autinstmodel | cics_inquire_autoinstall | cics_inquire_brfacility | cics_inquire_bundle | cics_inquire_bundlepart | cics_inquire_capdatapred |
+                              cics_inquire_capinfosrce | cics_inquire_capoptpred);
 cics_inquire_association: (ASSOCIATION cics_data_value | (ACAPPLNAME | ACMAJORVER | ACMICROVER | ACMINORVER | ACOPERNAME | ACPLATNAME | APPLDATA | APPLID | CLIENTIPADDR | CLIENTLOC
                                                                      | CLIENTPORT | DNAME | FACILNAME | INITUSERID | IPCONN | LUNAME | MVSIMAGE | NETID | ODADPTRDATA1
                                                                      | ODADPTRDATA2 | ODADPTRDATA3 | ODADPTRID| ODAPPLID | ODCLNTPORT | ODFACILNAME | ODLUNAME | ODNETID | ODNETWORKID | ODSERVERPORT | ODSTARTTIME
@@ -467,10 +468,11 @@ cics_inquire_autoinstall: (AUTOINSTALL | (AIBRIDGE | CONSOLES | ENABLESTATUS) ci
 cics_inquire_brfacility: (BRFACILITY cics_data_value | (KEEPTIME | LINKSYSTEM | LINKSYSNET | NETNAME | REMOTESYSNET | REMOTESYSTEM | TASKID | TERMID | TRANSACTION) cics_data_area | (NAMESPACE | TERMSTATUS) cics_cvda | cics_handle_response)+;
 cics_inquire_bundle: ((BUNDLE | BUNDLEID | MAJORVERSION | MGMTPART | MICROVERSION | MINORVERSION) cics_data_value | (AVAILSTATUS | CHANGEAGENT | ENABLESTATUS | INSTALLAGENT) cics_cvda |
                       (BASESCOPE | BUNDLEDIR | CHANGEAGREL | CHANGETIME | CHANGEUSRID | DEFINESOURCE | DEFINETIME | ENABLEDCOUNT | INSTALLTIME | INSTALLUSRID | PARTCOUNT | TARGETCOUNT) | cics_handle_response)+;
-
 cics_inquire_bundlepart: ((BUNDLEPART | METADATAFILE | PARTTYPE cics_data_area) | BUNDLE cics_data_value | (AVAILSTATUS | ENABLESTATUS | PARTCLASS) cics_cvda | cics_handle_response)+;
 cics_inquire_capdatapred: (CAPDATAPRED | (CAPTURESPEC | EVENTBINDING) cics_data_value | (CONTAINER | FIELDLENGTH | FIELDOFFSET | FILENAME | FILTERVALUE | LOCATION | STRUCTNAME | VARIABLENAME) cics_data_area | OPERATOR cics_cvda | cics_handle_response)+;
 
+cics_inquire_capinfosrce: (CAPINFOSRCE | (CAPTURESPEC | EVENTBINDING) cics_data_value | (CONTAINER | FIELDLENGTH | FIELDOFFSET | FILENAME | ITEMNAME | LOCATION | STRUCTNAME | VARIABLENAME) cics_data_area | cics_handle_response)+;
+cics_inquire_capoptpred: (CAPOPTPRED | (CAPTURESPEC | EVENTBINDING)  cics_data_value | (FILTERVALUE | OPTIONNAME) cics_data_area | OPERATOR cics_cvda | cics_handle_response)+;
 
 
 
@@ -1022,6 +1024,8 @@ cicsLexerDefinedVariableUsageTokens:
 	| BUNDLEPART
 	| CADDRLENGTH
 	| CAPDATAPRED
+	| CAPINFOSRCE
+	| CAPOPTPRED
 	| CAPTURESPEC
 	| CARD
 	| CBUFF
@@ -1275,6 +1279,7 @@ cicsLexerDefinedVariableUsageTokens:
 	| ISSUE
 	| ISSUER
 	| ITEM
+	| ITEMNAME
 	| IUTYPE
 	| JOURNALNAME
 	| JTYPEID
@@ -1435,6 +1440,7 @@ cicsLexerDefinedVariableUsageTokens:
 	| OPERPURGE
 	| OPID
 	| OPSECURITY
+	| OPTIONNAME
 	| OPTIONS
 	| ORGABCODE
 	| ORGANIZATLEN
