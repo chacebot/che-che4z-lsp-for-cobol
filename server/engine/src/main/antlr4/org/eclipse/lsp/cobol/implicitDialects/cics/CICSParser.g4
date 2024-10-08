@@ -449,7 +449,7 @@ cics_inquire_timer: ((TIMER | ACTIVITYID) cics_data_value | (EVENT | ABSTIME) ci
 
 /** INQUIRE, System Commands */
 cics_inquire_system: INQUIRE (cics_inquire_association | cics_inquire_association_list | cics_inquire_atomservice | cics_inquire_autinstmodel | cics_inquire_autoinstall | cics_inquire_brfacility | cics_inquire_bundle | cics_inquire_bundlepart | cics_inquire_capdatapred |
-                              cics_inquire_capinfosrce | cics_inquire_capoptpred);
+                              cics_inquire_capinfosrce | cics_inquire_capoptpred | cics_inquire_capturespec | cics_inquire_connection);
 cics_inquire_association: (ASSOCIATION cics_data_value | (ACAPPLNAME | ACMAJORVER | ACMICROVER | ACMINORVER | ACOPERNAME | ACPLATNAME | APPLDATA | APPLID | CLIENTIPADDR | CLIENTLOC
                                                                      | CLIENTPORT | DNAME | FACILNAME | INITUSERID | IPCONN | LUNAME | MVSIMAGE | NETID | ODADPTRDATA1
                                                                      | ODADPTRDATA2 | ODADPTRDATA3 | ODADPTRID| ODAPPLID | ODCLNTPORT | ODFACILNAME | ODLUNAME | ODNETID | ODNETWORKID | ODSERVERPORT | ODSTARTTIME
@@ -470,9 +470,11 @@ cics_inquire_bundle: ((BUNDLE | BUNDLEID | MAJORVERSION | MGMTPART | MICROVERSIO
                       (BASESCOPE | BUNDLEDIR | CHANGEAGREL | CHANGETIME | CHANGEUSRID | DEFINESOURCE | DEFINETIME | ENABLEDCOUNT | INSTALLTIME | INSTALLUSRID | PARTCOUNT | TARGETCOUNT) | cics_handle_response)+;
 cics_inquire_bundlepart: ((BUNDLEPART | METADATAFILE | PARTTYPE cics_data_area) | BUNDLE cics_data_value | (AVAILSTATUS | ENABLESTATUS | PARTCLASS) cics_cvda | cics_handle_response)+;
 cics_inquire_capdatapred: (CAPDATAPRED | (CAPTURESPEC | EVENTBINDING) cics_data_value | (CONTAINER | FIELDLENGTH | FIELDOFFSET | FILENAME | FILTERVALUE | LOCATION | STRUCTNAME | VARIABLENAME) cics_data_area | OPERATOR cics_cvda | cics_handle_response)+;
-
 cics_inquire_capinfosrce: (CAPINFOSRCE | (CAPTURESPEC | EVENTBINDING) cics_data_value | (CONTAINER | FIELDLENGTH | FIELDOFFSET | FILENAME | ITEMNAME | LOCATION | STRUCTNAME | VARIABLENAME) cics_data_area | cics_handle_response)+;
 cics_inquire_capoptpred: (CAPOPTPRED | (CAPTURESPEC | EVENTBINDING)  cics_data_value | (FILTERVALUE | OPTIONNAME) cics_data_area | OPERATOR cics_cvda | cics_handle_response)+;
+cics_inquire_capturespec: ((CAPTURESPEC | CAPTUREPOINT | CURRPGM | CURRTRANID | CURRUSERID | EVENTNAME | NUMDATAPRD | NUMINFOSRCE | NUMOPTPRED | PRIMPRED) cics_data_area | EVENTBINDING cics_data_value | (CAPTUREPTYPE | CURRPGMOP | CURRTRANIDOP | CURRUSERIDOP | PRIMPREDOP | PRIMPREDTYPE) cics_cvda | cics_handle_response)+;
+cics_inquire_connection: (CONNECTION cics_data_value | (ACCESSMETHOD | ACQSTATUS | AUTOCONNECT | CHANGEAGENT | CONNSTATUS | CONNTYPE | CQP | EXITTRACING | INSTALLAGENT | PENDSTATUS | PROTOCOL | RECOVSTATUS | SERVSTATUS | XLNSTATUS | ZCPTRACING) cics_cvda | (AIDCOUNT | CHANGEAGREL | CHANGETIME | CHANGEUSRID | DEFINESOURCE | DEFINETIME | GRNAME | INSTALLTIME | INSTALLUSRID | LINKSYSTEM | MEMBERNAME | NETNAME | NQNAME | RECEIVECOUNT | REMOTENAME | REMOTESYSNET | REMOTESYSTEM | SENDCOUNT) cics_data_area | cics_handle_response)+;
+
 
 
 
@@ -956,6 +958,7 @@ cicsLexerDefinedVariableUsageTokens:
 	| ABPROGRAM
 	| ABSTIME
 	| ACAPPLNAME
+	| ACCESSMETHOD
 	| ACCUM
 	| ACEE
 	| ACMAJORVER
@@ -966,12 +969,14 @@ cicsLexerDefinedVariableUsageTokens:
 	| ACQACTIVITY
 	| ACQPROCESS
 	| ACQUACTIVITY
+	| ACQSTATUS
 	| ACTION
 	| ACTIVITY
 	| ACTIVITYID
 	| ACTPARTN
 	| AIBRIDGE
 	| AID
+	| AIDCOUNT
 	| ALARM
 	| ALTSCRNHT
 	| ALTSCRNWD
@@ -998,6 +1003,7 @@ cicsLexerDefinedVariableUsageTokens:
 	| ATTRIBUTES
 	| AUTHENTICATE
 	| AUTINSTMODEL
+	| AUTOCONNECT
 	| AUTOINSTALL
 	| AUTOPAGE
 	| AUXILIARY
@@ -1026,6 +1032,8 @@ cicsLexerDefinedVariableUsageTokens:
 	| CAPDATAPRED
 	| CAPINFOSRCE
 	| CAPOPTPRED
+	| CAPTUREPOINT
+	| CAPTUREPTYPE
 	| CAPTURESPEC
 	| CARD
 	| CBUFF
@@ -1075,6 +1083,9 @@ cicsLexerDefinedVariableUsageTokens:
 	| CONFIRM
 	| CONFIRMATION
 	| CONNECT
+	| CONNECTION
+	| CONNSTATUS
+	| CONNTYPE
 	| CONSISTENT
 	| CONSOLE
 	| CONSOLES
@@ -1088,11 +1099,18 @@ cicsLexerDefinedVariableUsageTokens:
 	| COUNTER
 	| COUNTRY
 	| COUNTRYLEN
+	| CQP
 	| CREATE
 	| CRITICAL
 	| CTLCHAR
 	| CURRENT
 	| CURREQS
+	| CURRPGM
+	| CURRPGMOP
+	| CURRTRANID
+	| CURRTRANIDOP
+	| CURRUSERID
+	| CURRUSERIDOP
 	| CWA
 	| CWALENG
 	| DATA1
@@ -1180,9 +1198,11 @@ cicsLexerDefinedVariableUsageTokens:
 	| ESMRESP
 	| EVENT
 	| EVENTBINDING
+	| EVENTNAME
 	| EVENTTYPE
 	| EVENTUAL
 	| EWASUPP
+	| EXITTRACING
 	| EXPECT
 	| EXPIRYTIME
 	| EXTDS
@@ -1232,6 +1252,7 @@ cicsLexerDefinedVariableUsageTokens:
 	| GETMAIN
 	| GETNEXT
 	| GMMI
+	| GRNAME
 	| GROUPID
 	| GTEQ
 	| HANDLE
@@ -1352,6 +1373,7 @@ cicsLexerDefinedVariableUsageTokens:
 	| MAXREQS
 	| MCC
 	| MEDIATYPE
+	| MEMBERNAME
 	| MESSAGEID
 	| METADATA
 	| METADATAFILE
@@ -1407,10 +1429,14 @@ cicsLexerDefinedVariableUsageTokens:
 	| NOTPURGEABLE
 	| NOTRUNCATE
 	| NOWAIT
+	| NQNAME
 	| NSCONTAINER
 	| NUMCIPHERS
+	| NUMDATAPRD
 	| NUMEVENTS
+	| NUMINFOSRCE
 	| NUMITEMS
+	| NUMOPTPRED
 	| NUMREC
 	| NUMROUTES
 	| NUMSEGMENTS
@@ -1474,6 +1500,7 @@ cicsLexerDefinedVariableUsageTokens:
 	| PATH
 	| PATHLENGTH
 	| PCT
+	| PENDSTATUS
 	| PF1
 	| PF10
 	| PF11
@@ -1519,6 +1546,9 @@ cicsLexerDefinedVariableUsageTokens:
 	| PREDICATE
 	| PREFIX
 	| PREPARE
+	| PRIMPRED
+	| PRIMPREDOP
+	| PRIMPREDTYPE
 	| PRINCONVID
 	| PRINSYSID
 	| PRINT
@@ -1530,6 +1560,7 @@ cicsLexerDefinedVariableUsageTokens:
 	| PROCNAME
 	| PROFILE
 	| PROTECT
+	| PROTOCOL
 	| PS
 	| PTCOUNT
 	| PTSTARTTIME
@@ -1552,16 +1583,19 @@ cicsLexerDefinedVariableUsageTokens:
 	| READPREV
 	| READQ
 	| REATTACH
+	| RECEIVECOUNT
 	| RECEIVER
 	| RECFM
 	| RECORDLEN
 	| RECORDLENGTH
+	| RECOVSTATUS
 	| REDUCE
 	| REFPARMS
 	| REFPARMSLEN
 	| RELATESINDEX
 	| RELATESTYPE
 	| RELATESURI
+	| REMOTENAME
 	| REMOTESYSNET
 	| REMOTESYSTEM
 	| REMOVE
@@ -1621,6 +1655,7 @@ cicsLexerDefinedVariableUsageTokens:
 	| SCRNWD
 	| SECONDS
 	| SEGMENTLIST
+	| SENDCOUNT
 	| SENDER
 	| SERIALNUM
 	| SERIALNUMLEN
@@ -1631,6 +1666,7 @@ cicsLexerDefinedVariableUsageTokens:
 	| SERVERIPADDR
 	| SERVERNAME
 	| SERVERPORT
+	| SERVSTATUS
 	| SESSION
 	| SESSTOKEN
 	| SHARED
@@ -1770,6 +1806,7 @@ cicsLexerDefinedVariableUsageTokens:
 	| WSACONTEXT
 	| WSAEPR
 	| XCTL
+	| XLNSTATUS
 	| XMLCONTAINER
 	| XMLTODATA
 	| XMLTRANSFORM
@@ -1780,7 +1817,8 @@ cicsLexerDefinedVariableUsageTokens:
 	| YYMMDD
 	| YYYYDDD
 	| YYYYDDMM
-	| YYYYMMDD;
+	| YYYYMMDD
+	| ZCPTRACING;
 
 name: variableNameUsage+;
 data_value: variableNameUsage+;
