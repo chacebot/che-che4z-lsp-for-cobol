@@ -449,7 +449,7 @@ cics_inquire_timer: ((TIMER | ACTIVITYID) cics_data_value | (EVENT | ABSTIME) ci
 
 /** INQUIRE, System Commands */
 cics_inquire_system: INQUIRE (cics_inquire_association | cics_inquire_association_list | cics_inquire_atomservice | cics_inquire_autinstmodel | cics_inquire_autoinstall | cics_inquire_brfacility | cics_inquire_bundle | cics_inquire_bundlepart | cics_inquire_capdatapred |
-                              cics_inquire_capinfosrce | cics_inquire_capoptpred | cics_inquire_capturespec | cics_inquire_connection);
+                              cics_inquire_capinfosrce | cics_inquire_capoptpred | cics_inquire_capturespec | cics_inquire_connection | cics_inquire_cfdtpool | cics_inquire_db2conn);
 cics_inquire_association: (ASSOCIATION cics_data_value | (ACAPPLNAME | ACMAJORVER | ACMICROVER | ACMINORVER | ACOPERNAME | ACPLATNAME | APPLDATA | APPLID | CLIENTIPADDR | CLIENTLOC
                                                                      | CLIENTPORT | DNAME | FACILNAME | INITUSERID | IPCONN | LUNAME | MVSIMAGE | NETID | ODADPTRDATA1
                                                                      | ODADPTRDATA2 | ODADPTRDATA3 | ODADPTRID| ODAPPLID | ODCLNTPORT | ODFACILNAME | ODLUNAME | ODNETID | ODNETWORKID | ODSERVERPORT | ODSTARTTIME
@@ -474,7 +474,8 @@ cics_inquire_capinfosrce: (CAPINFOSRCE | (CAPTURESPEC | EVENTBINDING) cics_data_
 cics_inquire_capoptpred: (CAPOPTPRED | (CAPTURESPEC | EVENTBINDING)  cics_data_value | (FILTERVALUE | OPTIONNAME) cics_data_area | OPERATOR cics_cvda | cics_handle_response)+;
 cics_inquire_capturespec: ((CAPTURESPEC | CAPTUREPOINT | CURRPGM | CURRTRANID | CURRUSERID | EVENTNAME | NUMDATAPRD | NUMINFOSRCE | NUMOPTPRED | PRIMPRED) cics_data_area | EVENTBINDING cics_data_value | (CAPTUREPTYPE | CURRPGMOP | CURRTRANIDOP | CURRUSERIDOP | PRIMPREDOP | PRIMPREDTYPE) cics_cvda | cics_handle_response)+;
 cics_inquire_connection: (CONNECTION cics_data_value | (ACCESSMETHOD | ACQSTATUS | AUTOCONNECT | CHANGEAGENT | CONNSTATUS | CONNTYPE | CQP | EXITTRACING | INSTALLAGENT | PENDSTATUS | PROTOCOL | RECOVSTATUS | SERVSTATUS | XLNSTATUS | ZCPTRACING) cics_cvda | (AIDCOUNT | CHANGEAGREL | CHANGETIME | CHANGEUSRID | DEFINESOURCE | DEFINETIME | GRNAME | INSTALLTIME | INSTALLUSRID | LINKSYSTEM | MEMBERNAME | NETNAME | NQNAME | RECEIVECOUNT | REMOTENAME | REMOTESYSNET | REMOTESYSTEM | SENDCOUNT) cics_data_area | cics_handle_response)+;
-
+cics_inquire_cfdtpool: (CFDTPOOL cics_data_value | CONNSTATUS cics_cvda | cics_handle_response)+;
+cics_inquire_db2conn: (DB2CONN | (ACCOUNTREC | AUTHTYPE | CHANGEAGENT | COMAUTHTYPE | CONNECTERROR | CONNECTST | DROLLBACK | INSTALLAGENT | NONTERMREL | PRIORITY | RESYNCMEMBER | STANDBYMODE | THREADERROR | THREADWAIT) cics_cvda | (AUTHID | CHANGEAGREL | CHANGETIME | CHANGEUSRID | COMAUTHID | COMTHREADLIM | COMTHREADS | DB2GROUPID | DB2ID | DB2RELEASE | DEFINESOURCE | DEFINETIME | INSTALLTIME | INSTALLUSRID | MSGQUEUE1 | MSGQUEUE2 | MSGQUEUE3 | PLAN | PLANEXITNAME | PURGECYCLEM | PURGECYCLES | REUSELIMIT | SIGNID | STATSQUEUE | TCBLIMIT | TCBS | THREADLIMIT | THREADS) cics_data_area | cics_handle_response)+;
 
 
 
@@ -959,6 +960,7 @@ cicsLexerDefinedVariableUsageTokens:
 	| ABSTIME
 	| ACAPPLNAME
 	| ACCESSMETHOD
+	| ACCOUNTREC
 	| ACCUM
 	| ACEE
 	| ACMAJORVER
@@ -1002,6 +1004,8 @@ cicsLexerDefinedVariableUsageTokens:
 	| ATTACHID
 	| ATTRIBUTES
 	| AUTHENTICATE
+	| AUTHID
+	| AUTHTYPE
 	| AUTINSTMODEL
 	| AUTOCONNECT
 	| AUTOINSTALL
@@ -1039,6 +1043,7 @@ cicsLexerDefinedVariableUsageTokens:
 	| CBUFF
 	| CCSID
 	| CERTIFICATE
+	| CFDTPOOL
 	| CHANGE
 	| CHANGETIME
 	| CHANNEL
@@ -1071,6 +1076,8 @@ cicsLexerDefinedVariableUsageTokens:
 	| CNOTCOMPL
 	| CODEPAGE
 	| COLOR
+	| COMAUTHID
+	| COMAUTHTYPE
 	| COMMAREA
 	| COMMONNAME
 	| COMMONNAMLEN
@@ -1079,11 +1086,15 @@ cicsLexerDefinedVariableUsageTokens:
 	| COMPLETE
 	| COMPOSITE
 	| COMPSTATUS
+	| COMTHREADLIM
+	| COMTHREADS
 	| CONFIGFILE
 	| CONFIRM
 	| CONFIRMATION
 	| CONNECT
+	| CONNECTERROR
 	| CONNECTION
+	| CONNECTST
 	| CONNSTATUS
 	| CONNTYPE
 	| CONSISTENT
@@ -1133,6 +1144,10 @@ cicsLexerDefinedVariableUsageTokens:
 	| DAYOFYEAR
 	| DAYS
 	| DAYSLEFT
+	| DB2CONN
+	| DB2GROUPID
+	| DB2ID
+	| DB2RELEASE
 	| DCOUNTER
 	| DDMMYY
 	| DDMMYYYY
@@ -1162,6 +1177,7 @@ cicsLexerDefinedVariableUsageTokens:
 	| DOCSTATUS
 	| DOCTOKEN
 	| DOCUMENT
+	| DROLLBACK
 	| DS3270
 	| DSSCS
 	| DUMP
@@ -1391,6 +1407,9 @@ cicsLexerDefinedVariableUsageTokens:
 	| MONITOR
 	| MONTH
 	| MONTHOFYEAR
+	| MSGQUEUE1
+	| MSGQUEUE2
+	| MSGQUEUE3
 	| MSR
 	| MSRCONTROL
 	| MVSIMAGE
@@ -1420,6 +1439,7 @@ cicsLexerDefinedVariableUsageTokens:
 	| NOHANDLE
 	| NOINCONVERT
 	| NONE
+	| NONTERMREL
 	| NOOUTCONERT
 	| NOQUEUE
 	| NOQUIESCE
@@ -1536,6 +1556,8 @@ cicsLexerDefinedVariableUsageTokens:
 	| PHTRANSID
 	| PIPLENGTH
 	| PIPLIST
+	| PLAN
+	| PLANEXITNAME
 	| POINT
 	| POOL
 	| POP
@@ -1569,6 +1591,8 @@ cicsLexerDefinedVariableUsageTokens:
 	| PUNCH
 	| PURGEABILITY
 	| PURGEABLE
+	| PURGECYCLEM
+	| PURGECYCLES
 	| PUSH
 	| PUT
 	| QNAME
@@ -1629,12 +1653,14 @@ cicsLexerDefinedVariableUsageTokens:
 	| RESTYPE
 	| RESULT
 	| RESUME
+	| RESYNCMEMBER
 	| RETAIN
 	| RETCODE
 	| RETCORD
 	| RETRIECE
 	| RETRIEVE
 	| RETURNPROG
+	| REUSELIMIT
 	| RIDFLD
 	| ROLE
 	| ROLELENGTH
@@ -1672,6 +1698,7 @@ cicsLexerDefinedVariableUsageTokens:
 	| SHARED
 	| SIGDATA
 	| SIGNAL
+	| SIGNID
 	| SIGNOFF
 	| SIGNON
 	| SIT
@@ -1686,6 +1713,7 @@ cicsLexerDefinedVariableUsageTokens:
 	| SRVRADDR6NU
 	| SRVRIPFAMILY
 	| SSLTYPE
+	| STANDBYMODE
 	| STARTBR
 	| STARTBROWSE
 	| STARTCODE
@@ -1695,6 +1723,7 @@ cicsLexerDefinedVariableUsageTokens:
 	| STATIONID
 	| STATUSCODE
 	| STATUSLEN
+	| STATSQUEUE
 	| STATUSTEXT
 	| STORAGE
 	| STRFIELD
@@ -1726,6 +1755,8 @@ cicsLexerDefinedVariableUsageTokens:
 	| TASK
 	| TASKID
 	| TASKPRIORITY
+	| TCBLIMIT
+	| TCBS
 	| TCPIP
 	| TCPIPJOB
 	| TCPIPSERVICE
@@ -1743,6 +1774,10 @@ cicsLexerDefinedVariableUsageTokens:
 	| TEXTKYBD
 	| TEXTLENGTH
 	| TEXTPRINT
+	| THREADERROR
+	| THREADLIMIT
+	| THREADS
+	| THREADWAIT
 	| TIMEOUT
 	| TIMER
 	| TIMESEP
