@@ -449,7 +449,7 @@ cics_inquire_timer: ((TIMER | ACTIVITYID) cics_data_value | (EVENT | ABSTIME) ci
 
 /** INQUIRE, System Commands */
 cics_inquire_system: INQUIRE (cics_inquire_association | cics_inquire_association_list | cics_inquire_atomservice | cics_inquire_autinstmodel | cics_inquire_autoinstall | cics_inquire_brfacility | cics_inquire_bundle | cics_inquire_bundlepart | cics_inquire_capdatapred |
-                              cics_inquire_capinfosrce | cics_inquire_capoptpred | cics_inquire_capturespec | cics_inquire_connection | cics_inquire_cfdtpool | cics_inquire_db2conn);
+                              cics_inquire_capinfosrce | cics_inquire_capoptpred | cics_inquire_capturespec | cics_inquire_connection | cics_inquire_cfdtpool | cics_inquire_db2conn | cics_inquire_db2entry | cics_inquire_db2tran);
 cics_inquire_association: (ASSOCIATION cics_data_value | (ACAPPLNAME | ACMAJORVER | ACMICROVER | ACMINORVER | ACOPERNAME | ACPLATNAME | APPLDATA | APPLID | CLIENTIPADDR | CLIENTLOC
                                                                      | CLIENTPORT | DNAME | FACILNAME | INITUSERID | IPCONN | LUNAME | MVSIMAGE | NETID | ODADPTRDATA1
                                                                      | ODADPTRDATA2 | ODADPTRDATA3 | ODADPTRID| ODAPPLID | ODCLNTPORT | ODFACILNAME | ODLUNAME | ODNETID | ODNETWORKID | ODSERVERPORT | ODSTARTTIME
@@ -476,7 +476,8 @@ cics_inquire_capturespec: ((CAPTURESPEC | CAPTUREPOINT | CURRPGM | CURRTRANID | 
 cics_inquire_connection: (CONNECTION cics_data_value | (ACCESSMETHOD | ACQSTATUS | AUTOCONNECT | CHANGEAGENT | CONNSTATUS | CONNTYPE | CQP | EXITTRACING | INSTALLAGENT | PENDSTATUS | PROTOCOL | RECOVSTATUS | SERVSTATUS | XLNSTATUS | ZCPTRACING) cics_cvda | (AIDCOUNT | CHANGEAGREL | CHANGETIME | CHANGEUSRID | DEFINESOURCE | DEFINETIME | GRNAME | INSTALLTIME | INSTALLUSRID | LINKSYSTEM | MEMBERNAME | NETNAME | NQNAME | RECEIVECOUNT | REMOTENAME | REMOTESYSNET | REMOTESYSTEM | SENDCOUNT) cics_data_area | cics_handle_response)+;
 cics_inquire_cfdtpool: (CFDTPOOL cics_data_value | CONNSTATUS cics_cvda | cics_handle_response)+;
 cics_inquire_db2conn: (DB2CONN | (ACCOUNTREC | AUTHTYPE | CHANGEAGENT | COMAUTHTYPE | CONNECTERROR | CONNECTST | DROLLBACK | INSTALLAGENT | NONTERMREL | PRIORITY | RESYNCMEMBER | STANDBYMODE | THREADERROR | THREADWAIT) cics_cvda | (AUTHID | CHANGEAGREL | CHANGETIME | CHANGEUSRID | COMAUTHID | COMTHREADLIM | COMTHREADS | DB2GROUPID | DB2ID | DB2RELEASE | DEFINESOURCE | DEFINETIME | INSTALLTIME | INSTALLUSRID | MSGQUEUE1 | MSGQUEUE2 | MSGQUEUE3 | PLAN | PLANEXITNAME | PURGECYCLEM | PURGECYCLES | REUSELIMIT | SIGNID | STATSQUEUE | TCBLIMIT | TCBS | THREADLIMIT | THREADS) cics_data_area | cics_handle_response)+;
-
+cics_inquire_db2entry: (DB2ENTRY cics_data_value | (ACCOUNTREC | AUTHTYPE | CHANGEAGENT | DISABLEDACT | DROLLBACK | ENABLESTATUS | INSTALLAGENT | PRIORITY | SHARELOCKS | THREADWAIT) cics_cvda | (AUTHID | CHANGEAGREL | CHANGETIME | CHANGEUSRID | DEFINESOURCE | DEFINETIME | INSTALLTIME | INSTALLUSRID | PLAN | PLANEXITNAME | PROTECTNUM | PTHREADS | THREADLIMIT | THREADS) cics_data_area | cics_handle_response)+;
+cics_inquire_db2tran: (DB2TRAN cics_data_value | (DB2ENTRY | CHANGEAGREL | CHANGETIME | CHANGEUSRID | DEFINESOURCE | DEFINETIME | INSTALLTIME | INSTALLUSRID | PLAN | PLANEXITNAME | TRANSID) cics_data_area | (CHANGEAGENT | INSTALLAGENT) cics_cvda | cics_handle_response)+;
 
 
 /** INVOKE SERVICE */
@@ -1145,9 +1146,11 @@ cicsLexerDefinedVariableUsageTokens:
 	| DAYS
 	| DAYSLEFT
 	| DB2CONN
+	| DB2ENTRY
 	| DB2GROUPID
 	| DB2ID
 	| DB2RELEASE
+	| DB2TRAN
 	| DCOUNTER
 	| DDMMYY
 	| DDMMYYYY
@@ -1169,6 +1172,7 @@ cicsLexerDefinedVariableUsageTokens:
 	| DFHVALUE
 	| DIGEST
 	| DIGESTTYPE
+	| DISABLEDACT
 	| DISCONNECT
 	| DNAME
 	| DNAMELEN
@@ -1582,9 +1586,11 @@ cicsLexerDefinedVariableUsageTokens:
 	| PROCNAME
 	| PROFILE
 	| PROTECT
+	| PROTECTNUM
 	| PROTOCOL
 	| PS
 	| PTCOUNT
+	| PTHREADS
 	| PTSTARTTIME
 	| PTTASKID
 	| PTTRANSID
@@ -1696,6 +1702,7 @@ cicsLexerDefinedVariableUsageTokens:
 	| SESSION
 	| SESSTOKEN
 	| SHARED
+	| SHARELOCKS
 	| SIGDATA
 	| SIGNAL
 	| SIGNID
