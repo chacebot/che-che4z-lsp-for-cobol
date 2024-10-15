@@ -450,7 +450,7 @@ cics_inquire_timer: ((TIMER | ACTIVITYID) cics_data_value | (EVENT | ABSTIME) ci
 /** INQUIRE, System Commands */
 cics_inquire_system: INQUIRE (cics_inquire_association | cics_inquire_association_list | cics_inquire_atomservice | cics_inquire_autinstmodel | cics_inquire_autoinstall | cics_inquire_brfacility | cics_inquire_bundle | cics_inquire_bundlepart | cics_inquire_capdatapred |
                               cics_inquire_capinfosrce | cics_inquire_capoptpred | cics_inquire_capturespec | cics_inquire_connection | cics_inquire_cfdtpool | cics_inquire_db2conn | cics_inquire_db2entry | cics_inquire_db2tran | cics_inquire_deletshipped | cics_inquire_dispatcher
-                              cics_inquire_doctemplate | cics_inquire_dsname);
+                              cics_inquire_doctemplate | cics_inquire_dsname | cics_inquire_dumpds | cics_inquire_enq);
 cics_inquire_association: (ASSOCIATION cics_data_value | (ACAPPLNAME | ACMAJORVER | ACMICROVER | ACMINORVER | ACOPERNAME | ACPLATNAME | APPLDATA | APPLID | CLIENTIPADDR | CLIENTLOC
                                                                      | CLIENTPORT | DNAME | FACILNAME | INITUSERID | IPCONN | LUNAME | MVSIMAGE | NETID | ODADPTRDATA1
                                                                      | ODADPTRDATA2 | ODADPTRDATA3 | ODADPTRID| ODAPPLID | ODCLNTPORT | ODFACILNAME | ODLUNAME | ODNETID | ODNETWORKID | ODSERVERPORT | ODSTARTTIME
@@ -483,6 +483,8 @@ cics_inquire_deletshipped: (DELETSHIPPED | (IDLE | IDLEHRS | IDLEMINS | IDLESECS
 cics_inquire_dispatcher: (DISPATCHER | (ACTOPENTCBS | ACTSSLTCBS | ACTTHRDTCBS | ACTXPTCBS | MAXOPENTCBS | MAXSSLTCBS | MAXTHRDTCBS | MAXXPTCBS | MROBATCH | PRTYAGING | RUNAWAY | SCANDELAY | SUBTASKS | TIME) cics_data_area | cics_handle_response)+;
 cics_inquire_doctemplate: ((DOCTEMPLATE cics_data_value) | (APPENDCRLF | CHANGEAGENT | INSTALLAGENT | TEMPLATETYPE | TYPE) cics_cvda | (CACHESIZE | CHANGEAGREL | CHANGETIME | CHANGEUSRID | DDNAME | DEFINESOURCE | DEFINETIME | DSNAME | EXITPGM | FILE | HFSFILE | INSTALLTIME | INSTALLUSRID | MEMBER | PROGRAM | TDQUEUE | TEMPLATENAME | TSQUEUE) cics_data_area | cics_handle_response)+;
 cics_inquire_dsname: (DSNAME cics_data_value | (ACCESSMETHOD | AVAILABILITY | BACKUPTYPE | OBJECT | LOGREPSTATUS | LOSTLOCKS | QUIESCESTATE | RECOVSTATUS | RETLOCKS | VALIDITY) cics_cvda | (BASEDSNAME | FILECOUNT | FWDRECOVLOG | FWDRECOVLSN) cics_data_area | cics_handle_response)+;
+cics_inquire_dumpds: (DUMPDS | (CURRENTDDS | INITIALDDS) cics_data_area | (OPENSTATUS | SWITCHSTATUS) cics_cvda | cics_handle_response)+;
+cics_inquire_enq: (ENQ | (ENQSCOPE | RESOURCE | RESLEN | UOW) cics_data_value | (DURATION | ENQFAILS | NETUOWID | QUALIFIER | QUALLEN | RESLEN | RESOURCE | TASKID | TRANSID | UOW) cics_data_area | (RELATION | STATE | TYPE) cics_cvda | cics_handle_response)+;
 
 /** INVOKE SERVICE */
 cics_invoke: INVOKE (SERVICE cics_data_value | CHANNEL cics_data_value | OPERATION cics_data_value | URI cics_data_value |
@@ -946,7 +948,7 @@ cicsWord
     ;
 
 cicsWords
-    : ENDFILE | ERROR | ABORT | ADDRESS | AFTER | ALTER | AS | ASSIGN | AT | ATTACH | BINARY | CANCEL | CHANNEL | CLASS | CLOSE
+    : AUTOINSTALL | DB2CONN | DELETSHIPPED | DISPATCHER | DUMPDS | ENDFILE | ENQ | ERROR | ABORT | ADDRESS | AFTER | ALTER | AS | ASSIGN | AT | ATTACH | BINARY | CANCEL | CHANNEL | CLASS | CLOSE
     | CONTROL | COPY | DATA | DELETE | DELIMITER | DETAIL | END | ENTER | ENTRY | EQUAL | ERASE | EVENT
     | EXCEPTION | EXTERNAL | FOR | FROM | INPUT | INTO | INVOKE | LABEL | LAST | LENGTH | LINE | LINK | LIST | MESSAGE
     | MMDDYYYY | MODE | ORGANIZATION | OUTPUT | PAGE | PARSE | PASSWORD | PROCESS
@@ -1018,7 +1020,6 @@ cicsLexerDefinedVariableUsageTokens:
 	| AUTHTYPE
 	| AUTINSTMODEL
 	| AUTOCONNECT
-	| AUTOINSTALL
 	| AUTOPAGE
 	| AUXILIARY
 	| AVAILABILITY
@@ -1129,6 +1130,7 @@ cicsLexerDefinedVariableUsageTokens:
 	| CRITICAL
 	| CTLCHAR
 	| CURRENT
+	| CURRENTDDS
 	| CURREQS
 	| CURRPGM
 	| CURRPGMOP
@@ -1158,7 +1160,6 @@ cicsLexerDefinedVariableUsageTokens:
 	| DAYOFYEAR
 	| DAYS
 	| DAYSLEFT
-	| DB2CONN
 	| DB2ENTRY
 	| DB2GROUPID
 	| DB2ID
@@ -1178,7 +1179,6 @@ cicsLexerDefinedVariableUsageTokens:
 	| DEFSCRNWD
 	| DELAY
 	| DELETEQ
-	| DELETSHIPPED
 	| DEQ
 	| DESTCOUNT
 	| DESTID
@@ -1190,7 +1190,6 @@ cicsLexerDefinedVariableUsageTokens:
 	| DIGESTTYPE
 	| DISABLEDACT
 	| DISCONNECT
-	| DISPATCHER
 	| DNAME
 	| DNAMELEN
 	| DOCDELETE
@@ -1206,6 +1205,7 @@ cicsLexerDefinedVariableUsageTokens:
 	| DUMPCODE
 	| DUMPID
 	| DUPREC
+	| DURATION
 	| ECADDR
 	| ECBLIST
 	| EIB
@@ -1219,7 +1219,8 @@ cicsLexerDefinedVariableUsageTokens:
 	| ENDBROWSE
 	| ENDFILE
 	| ENDOUTPUT
-	| ENQ
+	| ENQFAILS
+	| ENQSCOPE
 	| ENTRYNAME
 	| EOC
 	| EODS
@@ -1323,6 +1324,7 @@ cicsLexerDefinedVariableUsageTokens:
 	| IGNORE
 	| IMMEDIATE
 	| INCREMENT
+	| INITIALDDS
 	| INITIMG
 	| INITPARM
 	| INITPARMLEN
@@ -1461,6 +1463,7 @@ cicsLexerDefinedVariableUsageTokens:
 	| NATLANGINUSE
 	| NETID
 	| NETNAME
+	| NETUOWID
 	| NEWPASSWORD
 	| NEWPHRASE
 	| NEWPHRASELEN
@@ -1523,6 +1526,7 @@ cicsLexerDefinedVariableUsageTokens:
 	| ODUSERID
 	| OIDCARD
 	| OPCLASS
+	| OPENSTATUS
 	| OPERATION
 	| OPERATOR
 	| OPERID
@@ -1641,6 +1645,8 @@ cicsLexerDefinedVariableUsageTokens:
 	| PUSH
 	| PUT
 	| QNAME
+	| QUALIFIER
+	| QUALLEN
 	| QUERY
 	| QUERYPARM
 	| QUERYSTRING
@@ -1665,6 +1671,7 @@ cicsLexerDefinedVariableUsageTokens:
 	| RELATESINDEX
 	| RELATESTYPE
 	| RELATESURI
+	| RELATION
 	| REMOTENAME
 	| REMOTESYSNET
 	| REMOTESYSTEM
@@ -1679,6 +1686,7 @@ cicsLexerDefinedVariableUsageTokens:
 	| RESETBR
 	| RESID
 	| RESIDLENGTH
+	| RESLEN
 	| RESOURCE
 	| RESOURCENAME
 	| RESOURCETYPE
@@ -1794,6 +1802,7 @@ cicsLexerDefinedVariableUsageTokens:
 	| SUBTASKS
 	| SUSPEND
 	| SUSPSTATUS
+	| SWITCHSTATUS
 	| SYMBOL
 	| SYMBOLLIST
 	| SYNCHRONOUS
