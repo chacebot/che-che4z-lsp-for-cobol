@@ -486,6 +486,9 @@ cics_inquire_dsname: (DSNAME cics_data_value | (ACCESSMETHOD | AVAILABILITY | BA
 cics_inquire_dumpds: (DUMPDS | (CURRENTDDS | INITIALDDS) cics_data_area | (OPENSTATUS | SWITCHSTATUS) cics_cvda | cics_handle_response)+;
 cics_inquire_enq: (ENQ | (ENQSCOPE | RESOURCE | RESLEN | UOW) cics_data_value | (DURATION | ENQFAILS | NETUOWID | QUALIFIER | QUALLEN | RESLEN | RESOURCE | TASKID | TRANSID | UOW) cics_data_area | (RELATION | STATE | TYPE) cics_cvda | cics_handle_response)+;
 
+cics_inquire_enq_model: (ENQMODEL cics_data_value | (CHANGEAGENT | INSTALLAGENT | STATUS) cics_cvda | (CHANGEAGREL | CHANGETIME | CHANGEUSRID | DEFINESOURCE | DEFINETIME | ENQSCOPE | ENQNAME | INSTALLTIME | INSTALLUSRID) cics_data_area | cics_handle_response)+;
+cics_inquire_epadadapter: (EPADAPTER cics_data_value | (ADAPTERTYPE | AUTHORITY | DATAFORMAT | EMITMODE | ENABLESTATUS | INVOKETYPE | PRIORITY | TRANSMODE | CHANGEAGENT | INSTALLAGENT) cics_cvda | (AUTHUSERID | CONFIGDATA1 | PROGRAM | TRANSACTION | CHANGEAGREL | CHANGETIME | CHANGEUSRID | DEFINESOURCE | DEFINETIME | INSTALLTIME | INSTALLUSRID) cics_data_area | cics_handle_response)+;
+
 /** INVOKE SERVICE */
 cics_invoke: INVOKE (SERVICE cics_data_value | CHANNEL cics_data_value | OPERATION cics_data_value | URI cics_data_value |
              URIMAP cics_data_value | SCOPE cics_data_value | SCOPELEN cics_data_value | cics_handle_response)+;
@@ -987,6 +990,7 @@ cicsLexerDefinedVariableUsageTokens:
 	| ACTSSLTCBS
 	| ACTTHRDTCBS
 	| ACTXPTCBS
+	| ADAPTERTYPE
 	| AIBRIDGE
 	| AID
 	| AIDCOUNT
@@ -1018,9 +1022,11 @@ cicsLexerDefinedVariableUsageTokens:
 	| AUTHENTICATE
 	| AUTHID
 	| AUTHTYPE
+	| AUTHUSERID
 	| AUTINSTMODEL
 	| AUTOCONNECT
 	| AUTOPAGE
+	| AUTHORITY
 	| AUXILIARY
 	| AVAILABILITY
 	| BACKUPTYPE
@@ -1103,6 +1109,7 @@ cicsLexerDefinedVariableUsageTokens:
 	| COMPSTATUS
 	| COMTHREADLIM
 	| COMTHREADS
+	| CONFIGDATA1
 	| CONFIGFILE
 	| CONFIRM
 	| CONFIRMATION
@@ -1142,6 +1149,7 @@ cicsLexerDefinedVariableUsageTokens:
 	| CWALENG
 	| DATA1
 	| DATA2
+	| DATAFORMAT
 	| DATALENGTH
 	| DATALENTH
 	| DATAONLY
@@ -1213,6 +1221,7 @@ cicsLexerDefinedVariableUsageTokens:
 	| ELEMNAMELEN
 	| ELEMNS
 	| ELEMNSLEN
+	| EMITMODE
 	| ENABLEDCOUNT
 	| ENDACTIVITY
 	| ENDBR
@@ -1220,10 +1229,12 @@ cicsLexerDefinedVariableUsageTokens:
 	| ENDFILE
 	| ENDOUTPUT
 	| ENQFAILS
+	| ENQMODEL
 	| ENQSCOPE
 	| ENTRYNAME
 	| EOC
 	| EODS
+	| EPADAPTER
 	| EPRFIELD
 	| EPRFROM
 	| EPRINTO
@@ -1345,6 +1356,7 @@ cicsLexerDefinedVariableUsageTokens:
 	| INVITE
 	| INVMPSZ
 	| INVOKE
+	| INVOKETYPE
 	| INVOKINGPROG
 	| INVPARTN
 	| INVREQ
@@ -1856,6 +1868,7 @@ cicsLexerDefinedVariableUsageTokens:
 	| TRANSACTION
 	| TRANSFORM
 	| TRANSID
+	| TRANSMODE
 	| TRIGGER
 	| TRNGRPID
 	| TRT
