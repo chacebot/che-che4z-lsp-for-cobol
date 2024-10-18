@@ -450,20 +450,18 @@ cics_inquire_timer: ((TIMER | ACTIVITYID) cics_data_value | (EVENT | ABSTIME) ci
 /** INQUIRE, System Commands */
 cics_inquire_system: INQUIRE (cics_inquire_association | cics_inquire_association_list | cics_inquire_atomservice | cics_inquire_autinstmodel | cics_inquire_autoinstall | cics_inquire_brfacility | cics_inquire_bundle | cics_inquire_bundlepart | cics_inquire_capdatapred |
                               cics_inquire_capinfosrce | cics_inquire_capoptpred | cics_inquire_capturespec | cics_inquire_connection | cics_inquire_cfdtpool | cics_inquire_db2conn | cics_inquire_db2entry | cics_inquire_db2tran | cics_inquire_deletshipped | cics_inquire_dispatcher
-                              cics_inquire_doctemplate | cics_inquire_dsname | cics_inquire_dumpds | cics_inquire_enq);
+                              cics_inquire_doctemplate | cics_inquire_dsname | cics_inquire_dumpds | cics_inquire_enq | cics_inquire_enq_model | cics_inquire_epadadapter | cics_inquire_epadapterset | cics_inquire_epadaptinset | cics_inquire_eventbinding | cics_inquire_eventprocess);
+
 cics_inquire_association: (ASSOCIATION cics_data_value | (ACAPPLNAME | ACMAJORVER | ACMICROVER | ACMINORVER | ACOPERNAME | ACPLATNAME | APPLDATA | APPLID | CLIENTIPADDR | CLIENTLOC
                                                                      | CLIENTPORT | DNAME | FACILNAME | INITUSERID | IPCONN | LUNAME | MVSIMAGE | NETID | ODADPTRDATA1
                                                                      | ODADPTRDATA2 | ODADPTRDATA3 | ODADPTRID| ODAPPLID | ODCLNTPORT | ODFACILNAME | ODLUNAME | ODNETID | ODNETWORKID | ODSERVERPORT | ODSTARTTIME
                                                                      | ODTASKID | ODTCPIPS | ODTRANSID | ODUSERID | PHAPPLID | PHCOUNT | PHNETWORKID | PHSTARTTIME | PHTASKID | PHTRANSID | PROGRAM | PTCOUNT | PTSTARTTIME
                                                                      | PTTASKID | PTTRANSID | REALM | SERVERIPADDR | SERVERPORT | STARTTIME | TCPIPJOB | TCPIPSERVICE | TCPIPZONE | TRNGRPID | TRANSACTION | USERCORRDATA | USERID) cics_data_area
                                                                      | (CLNTIPFAMILY | FACILTYPE | IPFAMILY | ODFACILTYPE | ODIPFAMILY | SRVRIPFAMILY) cics_cvda | cics_handle_response)+;
-
 // TODO: Testing with compiler throws 0008 if LISTSIZE is before LIST but any other combination of options works
 cics_inquire_association_list: (ASSOCIATION | LIST | LISTSIZE cics_data_area | (DNAME | DNAMELEN | REALM | REALMLEN | USERCORRDATA) cics_data_value | SET cics_ref | cics_handle_response)+;
-
 cics_inquire_atomservice: (ATOMSERVICE cics_data_value | (ATOMTYPE | CHANGEAGENT | ENABLESTATUS | INSTALLAGENT | RESOURCETYPE) cics_cvda |
                           (BINDFILE | CHANGEAGREL | CHANGETIME | CHANGEUSRID | CONFIGFILE | DEFINESOURCE | DEFINETIME | INSTALLTIME | INSTALLUSRID | RESOURCENAME | URIMAP | XMLTRANSFORM) cics_data_area | cics_handle_response)+;
-
 cics_inquire_autinstmodel: (AUTINSTMODEL cics_data_value | cics_handle_response)+;
 cics_inquire_autoinstall: (AUTOINSTALL | (AIBRIDGE | CONSOLES | ENABLESTATUS) cics_cvda | (CURREQS | MAXREQS | PROGRAM) cics_data_area | cics_handle_response)+;
 cics_inquire_brfacility: (BRFACILITY cics_data_value | (KEEPTIME | LINKSYSTEM | LINKSYSNET | NETNAME | REMOTESYSNET | REMOTESYSTEM | TASKID | TERMID | TRANSACTION) cics_data_area | (NAMESPACE | TERMSTATUS) cics_cvda | cics_handle_response)+;
@@ -485,9 +483,13 @@ cics_inquire_doctemplate: ((DOCTEMPLATE cics_data_value) | (APPENDCRLF | CHANGEA
 cics_inquire_dsname: (DSNAME cics_data_value | (ACCESSMETHOD | AVAILABILITY | BACKUPTYPE | OBJECT | LOGREPSTATUS | LOSTLOCKS | QUIESCESTATE | RECOVSTATUS | RETLOCKS | VALIDITY) cics_cvda | (BASEDSNAME | FILECOUNT | FWDRECOVLOG | FWDRECOVLSN) cics_data_area | cics_handle_response)+;
 cics_inquire_dumpds: (DUMPDS | (CURRENTDDS | INITIALDDS) cics_data_area | (OPENSTATUS | SWITCHSTATUS) cics_cvda | cics_handle_response)+;
 cics_inquire_enq: (ENQ | (ENQSCOPE | RESOURCE | RESLEN | UOW) cics_data_value | (DURATION | ENQFAILS | NETUOWID | QUALIFIER | QUALLEN | RESLEN | RESOURCE | TASKID | TRANSID | UOW) cics_data_area | (RELATION | STATE | TYPE) cics_cvda | cics_handle_response)+;
-
 cics_inquire_enq_model: (ENQMODEL cics_data_value | (CHANGEAGENT | INSTALLAGENT | STATUS) cics_cvda | (CHANGEAGREL | CHANGETIME | CHANGEUSRID | DEFINESOURCE | DEFINETIME | ENQSCOPE | ENQNAME | INSTALLTIME | INSTALLUSRID) cics_data_area | cics_handle_response)+;
 cics_inquire_epadadapter: (EPADAPTER cics_data_value | (ADAPTERTYPE | AUTHORITY | DATAFORMAT | EMITMODE | ENABLESTATUS | INVOKETYPE | PRIORITY | TRANSMODE | CHANGEAGENT | INSTALLAGENT) cics_cvda | (AUTHUSERID | CONFIGDATA1 | PROGRAM | TRANSACTION | CHANGEAGREL | CHANGETIME | CHANGEUSRID | DEFINESOURCE | DEFINETIME | INSTALLTIME | INSTALLUSRID) cics_data_area | cics_handle_response)+;
+
+cics_inquire_epadapterset: ((EPADAPTERSET | EPADAPTERNUM |  CHANGEAGREL | CHANGETIME | CHANGEUSRID | DEFINESOURCE | DEFINETIME | INSTALLTIME | INSTALLUSRID) cics_data_area | (ENABLESTATUS | CHANGEAGENT | INSTALLAGENT) cics_cvda | cics_handle_response)+;
+cics_inquire_epadaptinset: (EPADAPTINSET | EPADAPTERSET cics_data_value | EPADAPTER cics_data_area | cics_handle_response)+;
+cics_inquire_eventbinding: (EVENTBINDING cics_data_value | (CHANGEAGENT | ENABLESTATUS | EPADAPTERRES | INSTALLAGENT) cics_cvda | (CHANGEAGREL | CHANGETIME | CHANGEUSRID | DEFINESOURCE | DEFINETIME | EPADAPTER | EPADAPTERSET | INSTALLTIME | INSTALLUSRID | USERTAG) cics_data_area | cics_handle_response)+;
+cics_inquire_eventprocess: (EVENTPROCESS | EPSTATUS cics_cvda | SCHEMALEVEL cics_data_area | cics_handle_response)+;
 
 /** INVOKE SERVICE */
 cics_invoke: INVOKE (SERVICE cics_data_value | CHANNEL cics_data_value | OPERATION cics_data_value | URI cics_data_value |
@@ -951,7 +953,7 @@ cicsWord
     ;
 
 cicsWords
-    : AUTOINSTALL | DB2CONN | DELETSHIPPED | DISPATCHER | DUMPDS | ENDFILE | ENQ | ERROR | ABORT | ADDRESS | AFTER | ALTER | AS | ASSIGN | AT | ATTACH | BINARY | CANCEL | CHANNEL | CLASS | CLOSE
+    : AUTOINSTALL | DB2CONN | DELETSHIPPED | DISPATCHER | DUMPDS | ENDFILE | ENQ | ERROR | EVENTPROCESS | ABORT | ADDRESS | AFTER | ALTER | AS | ASSIGN | AT | ATTACH | BINARY | CANCEL | CHANNEL | CLASS | CLOSE
     | CONTROL | COPY | DATA | DELETE | DELIMITER | DETAIL | END | ENTER | ENTRY | EQUAL | ERASE | EVENT
     | EXCEPTION | EXTERNAL | FOR | FROM | INPUT | INTO | INVOKE | LABEL | LAST | LENGTH | LINE | LINK | LIST | MESSAGE
     | MMDDYYYY | MODE | ORGANIZATION | OUTPUT | PAGE | PARSE | PASSWORD | PROCESS
@@ -1235,12 +1237,17 @@ cicsLexerDefinedVariableUsageTokens:
 	| EOC
 	| EODS
 	| EPADAPTER
+	| EPADAPTERNUM
+	| EPADAPTERRES
+    | EPADAPTERSET
+    | EPADAPTINSET
 	| EPRFIELD
 	| EPRFROM
 	| EPRINTO
 	| EPRLENGTH
 	| EPRSET
 	| EPRTYPE
+	| EPSTATUS
 	| ERASE
 	| ERASEAUP
 	| ERRTERM
@@ -1896,6 +1903,7 @@ cicsLexerDefinedVariableUsageTokens:
 	| USERNAME
 	| USERNAMELEN
 	| USERPRIORITY
+	| USERTAG
 	| VALIDATION
 	| VALIDITY
 	| VALUELENGTH
