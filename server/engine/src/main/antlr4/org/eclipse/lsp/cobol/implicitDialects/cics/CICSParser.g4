@@ -449,8 +449,9 @@ cics_inquire_timer: ((TIMER | ACTIVITYID) cics_data_value | (EVENT | ABSTIME) ci
 
 /** INQUIRE, System Commands */
 cics_inquire_system: INQUIRE (cics_inquire_association | cics_inquire_association_list | cics_inquire_atomservice | cics_inquire_autinstmodel | cics_inquire_autoinstall | cics_inquire_brfacility | cics_inquire_bundle | cics_inquire_bundlepart | cics_inquire_capdatapred |
-                              cics_inquire_capinfosrce | cics_inquire_capoptpred | cics_inquire_capturespec | cics_inquire_connection | cics_inquire_cfdtpool | cics_inquire_db2conn | cics_inquire_db2entry | cics_inquire_db2tran | cics_inquire_deletshipped | cics_inquire_dispatcher
-                              cics_inquire_doctemplate | cics_inquire_dsname | cics_inquire_dumpds | cics_inquire_enq | cics_inquire_enq_model | cics_inquire_epadadapter | cics_inquire_epadapterset | cics_inquire_epadaptinset | cics_inquire_eventbinding | cics_inquire_eventprocess);
+                              cics_inquire_capinfosrce | cics_inquire_capoptpred | cics_inquire_capturespec | cics_inquire_connection | cics_inquire_cfdtpool | cics_inquire_db2conn | cics_inquire_db2entry | cics_inquire_db2tran | cics_inquire_deletshipped | cics_inquire_dispatcher |
+                              cics_inquire_doctemplate | cics_inquire_dsname | cics_inquire_dumpds | cics_inquire_enq | cics_inquire_enq_model | cics_inquire_epadadapter | cics_inquire_epadapterset | cics_inquire_epadaptinset | cics_inquire_eventbinding | cics_inquire_eventprocess |
+                              cics_inquire_exci | cics_inquire_exitprogram);
 
 cics_inquire_association: (ASSOCIATION cics_data_value | (ACAPPLNAME | ACMAJORVER | ACMICROVER | ACMINORVER | ACOPERNAME | ACPLATNAME | APPLDATA | APPLID | CLIENTIPADDR | CLIENTLOC
                                                                      | CLIENTPORT | DNAME | FACILNAME | INITUSERID | IPCONN | LUNAME | MVSIMAGE | NETID | ODADPTRDATA1
@@ -490,6 +491,12 @@ cics_inquire_epadapterset: ((EPADAPTERSET | EPADAPTERNUM |  CHANGEAGREL | CHANGE
 cics_inquire_epadaptinset: (EPADAPTINSET | EPADAPTERSET cics_data_value | EPADAPTER cics_data_area | cics_handle_response)+;
 cics_inquire_eventbinding: (EVENTBINDING cics_data_value | (CHANGEAGENT | ENABLESTATUS | EPADAPTERRES | INSTALLAGENT) cics_cvda | (CHANGEAGREL | CHANGETIME | CHANGEUSRID | DEFINESOURCE | DEFINETIME | EPADAPTER | EPADAPTERSET | INSTALLTIME | INSTALLUSRID | USERTAG) cics_data_area | cics_handle_response)+;
 cics_inquire_eventprocess: (EVENTPROCESS | EPSTATUS cics_cvda | SCHEMALEVEL cics_data_area | cics_handle_response)+;
+cics_inquire_exci: ((EXCI | TASK | UTIL) cics_data_value | cics_handle_response)+;
+cics_inquire_exitprogram: ((EXITPROGRAM | EXIT) cics_data_value | (ENTRYNAME | GAENTRYNAME | GALENGTH | GAUSECOUNT | NUMEXITS | QUALIFIER | TALENGTH | USECOUNT) cics_data_area | (APIST | CONCURRENTST | CONNECTST | FORMATEDFST | INDOUBTST | PURGEABLEST | SHUTDOWNST | SPIST | STARTSTATUS | TASKSTARTST) cics_cvda | ENTRY cics_ref | cics_handle_response)+;
+
+cics_inquire_featurekey: (FEATUREKEY cics_data_value | (VALUE | FILEPATH) cics_data_area | cics_handle_response)+;
+cics_inquire_file: (FILE cics_data_value | (ACCESSMETHOD | ADD | BLOCKFORMAT | BROWSE | CHANGEAGENT | DELETE | DISPOSITION | EMPTYSTATUS | ENABLESTATUS | EXCLUSIVE | FWDRECSTATUS | INSTALLAGENT | LOADTYPE | OBJECT | OPENSTATUS | RBATYPE | READ | READINTEG | RECORDFORMAT | RECOVSTATUS | RELTYPE | REMOTETABLE | RLSACCESS | TABLE | TYPE | UPDATE | UPDATEMODEL) cics_cvda |
+                   (BASEDSNAME | BLOCKKEYLEN | BLOCKSIZE | CFDTPOOL | CHANGEAGREL | CHANGETIME | CHANGEUSRID | DEFINESOURCE | DEFINETIME | DSNAME | INSTALLTIME | INSTALLUSRID | JOURNALNUM | KEYLENGTH | KEYPOSITION | LSRPOOLNUM | MAXNUMRECS | RECORDSIZE | REMOTENAME | REMOTESYSTEM | STRINGS | TABLENAME) cics_data_area | cics_handle_response)+;
 
 /** INVOKE SERVICE */
 cics_invoke: INVOKE (SERVICE cics_data_value | CHANNEL cics_data_value | OPERATION cics_data_value | URI cics_data_value |
@@ -1000,6 +1007,7 @@ cicsLexerDefinedVariableUsageTokens:
 	| ALTSCRNHT
 	| ALTSCRNWD
 	| ANYKEY
+	| APIST
 	| APLKYBD
 	| APLTEXT
 	| APPENDCRLF
@@ -1039,6 +1047,9 @@ cicsLexerDefinedVariableUsageTokens:
 	| BELOW
 	| BIF
 	| BINDFILE
+	| BLOCKFORMAT
+	| BLOCKKEYLEN
+	| BLOCKSIZE
 	| BODYCHARSET
 	| BOOKMARK
 	| BRDATA
@@ -1046,6 +1057,7 @@ cicsLexerDefinedVariableUsageTokens:
 	| BREXIT
 	| BRFACILITY
 	| BRIDGE
+	| BROWSE
 	| BROWSETOKEN
 	| BTRANS
 	| BUFFER
@@ -1111,6 +1123,7 @@ cicsLexerDefinedVariableUsageTokens:
 	| COMPSTATUS
 	| COMTHREADLIM
 	| COMTHREADS
+	| CONCURRENTST
 	| CONFIGDATA1
 	| CONFIGFILE
 	| CONFIRM
@@ -1200,6 +1213,7 @@ cicsLexerDefinedVariableUsageTokens:
 	| DIGESTTYPE
 	| DISABLEDACT
 	| DISCONNECT
+	| DISPOSITION
 	| DNAME
 	| DNAMELEN
 	| DOCDELETE
@@ -1224,6 +1238,7 @@ cicsLexerDefinedVariableUsageTokens:
 	| ELEMNS
 	| ELEMNSLEN
 	| EMITMODE
+	| EMPTYSTATUS
 	| ENABLEDCOUNT
 	| ENDACTIVITY
 	| ENDBR
@@ -1259,7 +1274,10 @@ cicsLexerDefinedVariableUsageTokens:
 	| EVENTTYPE
 	| EVENTUAL
 	| EWASUPP
+	| EXCLUSIVE
+	| EXIT
 	| EXITPGM
+    | EXITPROGRAM
 	| EXITTRACING
 	| EXPECT
 	| EXPIRYTIME
@@ -1278,16 +1296,19 @@ cicsLexerDefinedVariableUsageTokens:
 	| FAULTSTRLEN
 	| FCI
 	| FCT
+	| FEATUREKEY
 	| FIELD
 	| FIELDLENGTH
 	| FILECOUNT
 	| FILENAME
+	| FILEPATH
 	| FILTERVALUE
 	| FIRESTATUS
 	| FLENGTH
 	| FMH
 	| FMHPARM
 	| FORCE
+	| FORMATEDFST
 	| FORMATTIME
 	| FORMFEED
 	| FORMFIELD
@@ -1305,6 +1326,10 @@ cicsLexerDefinedVariableUsageTokens:
 	| FULLDATE
 	| FWDRECOVLOG
 	| FWDRECOVLSN
+	| FWDRECSTATUS
+	| GAENTRYNAME
+	| GALENGTH
+	| GAUSECOUNT
 	| GCHARS
 	| GCODES
 	| GDS
@@ -1342,6 +1367,7 @@ cicsLexerDefinedVariableUsageTokens:
 	| IGNORE
 	| IMMEDIATE
 	| INCREMENT
+	| INDOUBTST
 	| INITIALDDS
 	| INITIMG
 	| INITPARM
@@ -1384,6 +1410,7 @@ cicsLexerDefinedVariableUsageTokens:
 	| KEEPTIME
 	| KEYLENGTH
 	| KEYNUMBER
+	| KEYPOSITION
 	| L40
 	| L64
 	| L80
@@ -1409,6 +1436,7 @@ cicsLexerDefinedVariableUsageTokens:
 	| LISTSIZE
 	| LLID
 	| LOAD
+	| LOADTYPE
 	| LOCATION
 	| LOCALCCSID
 	| LOCALITY
@@ -1423,6 +1451,7 @@ cicsLexerDefinedVariableUsageTokens:
 	| LOW_VALUE
 	| LOW_VALUES
 	| LUNAME
+	| LSRPOOLNUM
 	| MAIN
 	| MAJORVERSION
 	| MAP
@@ -1441,6 +1470,7 @@ cicsLexerDefinedVariableUsageTokens:
 	| MAXIMUM
 	| MAXLENGTH
 	| MAXLIFETIME
+	| MAXNUMRECS
 	| MAXOPENTCBS
 	| MAXPROCLEN
 	| MAXREQS
@@ -1517,6 +1547,7 @@ cicsLexerDefinedVariableUsageTokens:
 	| NUMCIPHERS
 	| NUMDATAPRD
 	| NUMEVENTS
+	| NUMEXITS
 	| NUMINFOSRCE
 	| NUMITEMS
 	| NUMOPTPRED
@@ -1659,6 +1690,7 @@ cicsLexerDefinedVariableUsageTokens:
 	| PUNCH
 	| PURGEABILITY
 	| PURGEABLE
+	| PURGEABLEST
 	| PURGECYCLEM
 	| PURGECYCLES
 	| PUSH
@@ -1672,8 +1704,10 @@ cicsLexerDefinedVariableUsageTokens:
 	| QUERYSTRLEN
 	| QUIESCESTATE
 	| RBA
+	| RBATYPE
 	| RBN
 	| RDATT
+	| READINTEG
 	| READNEXT
 	| READPREV
 	| READQ
@@ -1681,8 +1715,10 @@ cicsLexerDefinedVariableUsageTokens:
 	| RECEIVECOUNT
 	| RECEIVER
 	| RECFM
+	| RECORDFORMAT
 	| RECORDLEN
 	| RECORDLENGTH
+	| RECORDSIZE
 	| RECOVSTATUS
 	| REDUCE
 	| REFPARMS
@@ -1691,9 +1727,11 @@ cicsLexerDefinedVariableUsageTokens:
 	| RELATESTYPE
 	| RELATESURI
 	| RELATION
+	| RELTYPE
 	| REMOTENAME
 	| REMOTESYSNET
 	| REMOTESYSTEM
+	| REMOTETABLE
 	| REMOVE
 	| REPEATABLE
 	| REPETABLE
@@ -1736,6 +1774,7 @@ cicsLexerDefinedVariableUsageTokens:
 	| RETURNPROG
 	| REUSELIMIT
 	| RIDFLD
+	| RLSACCESS
 	| ROLE
 	| ROLELENGTH
 	| ROLLBACK
@@ -1782,6 +1821,7 @@ cicsLexerDefinedVariableUsageTokens:
 	| SNAMELENGTH
 	| SOAPFAULT
 	| SOSI
+	| SPIST
 	| SPOOLCLOSE
 	| SPOOLOPEN
 	| SPOOLREAD
@@ -1794,6 +1834,7 @@ cicsLexerDefinedVariableUsageTokens:
 	| STARTBR
 	| STARTBROWSE
 	| STARTCODE
+	| STARTSTATUS
 	| STARTTIME
 	| STATE
 	| STATELEN
@@ -1805,6 +1846,7 @@ cicsLexerDefinedVariableUsageTokens:
 	| STORAGE
 	| STRFIELD
 	| STRINGFORMAT
+	| STRINGS
 	| STRUCTNAME
 	| SUBADDR
 	| SUBCODELEN
@@ -1829,7 +1871,10 @@ cicsLexerDefinedVariableUsageTokens:
 	| SYNCONRETURN
 	| SYNCPOINT
 	| SYSID
+	| TABLE
+	| TABLENAME
 	| TABLES
+	| TALENGTH
 	| TARGETCOUNT
 	| TASK
 	| TASKID
@@ -1893,10 +1938,12 @@ cicsLexerDefinedVariableUsageTokens:
 	| UNLOCK
 	| UOW
 	| UPDATE
+	| UPDATEMODEL
 	| URI
 	| URIMAP
 	| URL
 	| URLLENGTH
+	| USECOUNT
 	| USERCORRDATA
 	| USERDATAKEY
 	| USERID
@@ -1904,6 +1951,7 @@ cicsLexerDefinedVariableUsageTokens:
 	| USERNAMELEN
 	| USERPRIORITY
 	| USERTAG
+	| UTIL
 	| VALIDATION
 	| VALIDITY
 	| VALUELENGTH
