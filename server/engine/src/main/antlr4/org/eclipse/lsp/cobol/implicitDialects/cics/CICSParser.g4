@@ -451,7 +451,8 @@ cics_inquire_timer: ((TIMER | ACTIVITYID) cics_data_value | (EVENT | ABSTIME) ci
 cics_inquire_system: INQUIRE (cics_inquire_association | cics_inquire_association_list | cics_inquire_atomservice | cics_inquire_autinstmodel | cics_inquire_autoinstall | cics_inquire_brfacility | cics_inquire_bundle | cics_inquire_bundlepart | cics_inquire_capdatapred |
                               cics_inquire_capinfosrce | cics_inquire_capoptpred | cics_inquire_capturespec | cics_inquire_connection | cics_inquire_cfdtpool | cics_inquire_db2conn | cics_inquire_db2entry | cics_inquire_db2tran | cics_inquire_deletshipped | cics_inquire_dispatcher |
                               cics_inquire_doctemplate | cics_inquire_dsname | cics_inquire_dumpds | cics_inquire_enq | cics_inquire_enq_model | cics_inquire_epadadapter | cics_inquire_epadapterset | cics_inquire_epadaptinset | cics_inquire_eventbinding | cics_inquire_eventprocess |
-                              cics_inquire_exci | cics_inquire_exitprogram);
+                              cics_inquire_exci | cics_inquire_exitprogram | cics_inquire_featurekey | cics_inquire_file | cics_inquire_host | cics_inquire_ipconn | cics_inquire_ipfacility | cics_inquire_irc | cics_inquire_journalmodel | cics_inquire_journalname |
+                              cics_inquire_jvmendpoint | cics_inquire_jvmserver | cics_inquire_library | cics_inquire_modename | cics_inquire_monitor | cics_inquire_mqconn | cics_inquire_mqini | cics_inquire_mqmonitor | cics_inquire_mvstcb);
 
 cics_inquire_association: (ASSOCIATION cics_data_value | (ACAPPLNAME | ACMAJORVER | ACMICROVER | ACMINORVER | ACOPERNAME | ACPLATNAME | APPLDATA | APPLID | CLIENTIPADDR | CLIENTLOC
                                                                      | CLIENTPORT | DNAME | FACILNAME | INITUSERID | IPCONN | LUNAME | MVSIMAGE | NETID | ODADPTRDATA1
@@ -486,17 +487,32 @@ cics_inquire_dumpds: (DUMPDS | (CURRENTDDS | INITIALDDS) cics_data_area | (OPENS
 cics_inquire_enq: (ENQ | (ENQSCOPE | RESOURCE | RESLEN | UOW) cics_data_value | (DURATION | ENQFAILS | NETUOWID | QUALIFIER | QUALLEN | RESLEN | RESOURCE | TASKID | TRANSID | UOW) cics_data_area | (RELATION | STATE | TYPE) cics_cvda | cics_handle_response)+;
 cics_inquire_enq_model: (ENQMODEL cics_data_value | (CHANGEAGENT | INSTALLAGENT | STATUS) cics_cvda | (CHANGEAGREL | CHANGETIME | CHANGEUSRID | DEFINESOURCE | DEFINETIME | ENQSCOPE | ENQNAME | INSTALLTIME | INSTALLUSRID) cics_data_area | cics_handle_response)+;
 cics_inquire_epadadapter: (EPADAPTER cics_data_value | (ADAPTERTYPE | AUTHORITY | DATAFORMAT | EMITMODE | ENABLESTATUS | INVOKETYPE | PRIORITY | TRANSMODE | CHANGEAGENT | INSTALLAGENT) cics_cvda | (AUTHUSERID | CONFIGDATA1 | PROGRAM | TRANSACTION | CHANGEAGREL | CHANGETIME | CHANGEUSRID | DEFINESOURCE | DEFINETIME | INSTALLTIME | INSTALLUSRID) cics_data_area | cics_handle_response)+;
-
 cics_inquire_epadapterset: ((EPADAPTERSET | EPADAPTERNUM |  CHANGEAGREL | CHANGETIME | CHANGEUSRID | DEFINESOURCE | DEFINETIME | INSTALLTIME | INSTALLUSRID) cics_data_area | (ENABLESTATUS | CHANGEAGENT | INSTALLAGENT) cics_cvda | cics_handle_response)+;
 cics_inquire_epadaptinset: (EPADAPTINSET | EPADAPTERSET cics_data_value | EPADAPTER cics_data_area | cics_handle_response)+;
 cics_inquire_eventbinding: (EVENTBINDING cics_data_value | (CHANGEAGENT | ENABLESTATUS | EPADAPTERRES | INSTALLAGENT) cics_cvda | (CHANGEAGREL | CHANGETIME | CHANGEUSRID | DEFINESOURCE | DEFINETIME | EPADAPTER | EPADAPTERSET | INSTALLTIME | INSTALLUSRID | USERTAG) cics_data_area | cics_handle_response)+;
 cics_inquire_eventprocess: (EVENTPROCESS | EPSTATUS cics_cvda | SCHEMALEVEL cics_data_area | cics_handle_response)+;
 cics_inquire_exci: ((EXCI | TASK | UTIL) cics_data_value | cics_handle_response)+;
 cics_inquire_exitprogram: ((EXITPROGRAM | EXIT) cics_data_value | (ENTRYNAME | GAENTRYNAME | GALENGTH | GAUSECOUNT | NUMEXITS | QUALIFIER | TALENGTH | USECOUNT) cics_data_area | (APIST | CONCURRENTST | CONNECTST | FORMATEDFST | INDOUBTST | PURGEABLEST | SHUTDOWNST | SPIST | STARTSTATUS | TASKSTARTST) cics_cvda | ENTRY cics_ref | cics_handle_response)+;
-
 cics_inquire_featurekey: (FEATUREKEY cics_data_value | (VALUE | FILEPATH) cics_data_area | cics_handle_response)+;
 cics_inquire_file: (FILE cics_data_value | (ACCESSMETHOD | ADD | BLOCKFORMAT | BROWSE | CHANGEAGENT | DELETE | DISPOSITION | EMPTYSTATUS | ENABLESTATUS | EXCLUSIVE | FWDRECSTATUS | INSTALLAGENT | LOADTYPE | OBJECT | OPENSTATUS | RBATYPE | READ | READINTEG | RECORDFORMAT | RECOVSTATUS | RELTYPE | REMOTETABLE | RLSACCESS | TABLE | TYPE | UPDATE | UPDATEMODEL) cics_cvda |
                    (BASEDSNAME | BLOCKKEYLEN | BLOCKSIZE | CFDTPOOL | CHANGEAGREL | CHANGETIME | CHANGEUSRID | DEFINESOURCE | DEFINETIME | DSNAME | INSTALLTIME | INSTALLUSRID | JOURNALNUM | KEYLENGTH | KEYPOSITION | LSRPOOLNUM | MAXNUMRECS | RECORDSIZE | REMOTENAME | REMOTESYSTEM | STRINGS | TABLENAME) cics_data_area | cics_handle_response)+;
+cics_inquire_host: ((HOST | TCPIPSERVICE) cics_data_area | ENABLESTATUS cics_cvda | cics_handle_response)+;
+cics_inquire_ipconn: ((IPCONN | AUTOCONNECT | CHANGEAGENT | CONNSTATUS | HA | HOSTTYPE | IDPROP | IPFAMILY | INSTALLAGENT | LINKAUTH | MIRRORLIFE | PENDSTATUS | RECOVSTATUS | SERVSTATUS | SSLTYPE | USERAUTH) cics_cvda |
+                      (APPLID | CERTIFICATE | CHANGEAGREL | CHANGETIME | CHANGEUSRID | CIPHERS | CLIENTLOC | DEFINESOURCE | DEFINETIME | HOST | IPRESOLVED | INSTALLTIME | INSTALLUSRID | MAXQTIME | NETWORKID | NUMCIPHERS | PARTNER | PORT | QUEUELIMIT | RECEIVECOUNT | SECURITYNAME | SENDCOUNT | TCPIPSERVICE) cics_data_area | cics_handle_response)+;
+
+cics_inquire_ipfacility: (IPFACILITY cics_data_value | IPCONN cics_data_area | IPFACILTYPE cics_cvda | cics_handle_response)+;
+cics_inquire_irc: (IRC | OPENSTATUS cics_cvda | XCFGROUP cics_data_area | cics_handle_response)+;
+cics_inquire_journalmodel: (JOURNALMODEL cics_data_value | (CHANGEAGENT | INSTALLAGENT | TYPE) cics_cvda | (CHANGEAGREL | CHANGETIME | CHANGEUSRID | DEFINESOURCE | DEFINETIME | INSTALLTIME | INSTALLUSRID | JOURNALNAME | STREAMNAME) cics_data_area | cics_handle_response)+;
+cics_inquire_journalname: (JOURNALNAME cics_data_value | (STATUS | TYPE) cics_cvda | STREAMNAME cics_data_area | cics_handle_response)+;
+cics_inquire_jvmendpoint: ((JVMENDPOINT | JVMSERVER) cics_data_value | (TYPE | PORT | SECPORT | HOST) cics_data_area | ENABLESTATUS cics_cvda | cics_handle_response)+;
+cics_inquire_jvmserver: (JVMSERVER cics_data_value | (CHANGEAGENT | ENABLESTATUS | INSTALLAGENT) cics_cvda | (CHANGEAGREL | CHANGETIME | CHANGEUSRID | CURRENTHEAP | DEFINESOURCE | DEFINETIME | GCPOLICY | INITHEAP | INSTALLTIME | INSTALLUSRID | JAVAHOME | JVMPROFILE | LERUNOPTS | LOG | MAXHEAP | OCCUPANCY | PID | PROFILE | PROFILEDIR | STDERR | STDOUT | THREADCOUNT | THREADLIMIT | TRACE | WORKDIR) cics_data_area | cics_handle_response)+;
+cics_inquire_library: (LIBRARY cics_data_value | (APPLICATION | APPLMAJORVER | APPLMINORVER | APPLMICROVER | CHANGEAGREL | CHANGETIME | CHANGEUSRID | DEFINESOURCE | DEFINETIME | DSNAME01 | DSNAME02 | DSNAME03 | DSNAME04 | DSNAME05 | DSNAME06 | DSNAME07 | DSNAME08 | DSNAME09 | DSNAME10 | DSNAME11 | DSNAME12 | DSNAME13 | DSNAME14 | DSNAME15 | DSNAME16 | INSTALLUSRID | INSTALLTIME | NUMDSNAMES | PLATFORM | RANKING | SEARCHPOS) cics_data_area | (CHANGEAGENT | CRITICALST | ENABLESTATUS | INSTALLAGENT) cics_cvda | DSNAMELIST cics_ref | cics_handle_response)+;
+cics_inquire_modename: ((MODENAME | CONNECTION) cics_data_value | (ACTIVE | AVAILABLE | MAXIMUM | MAXWINNERS) cics_data_area | AUTOCONNECT cics_cvda | cics_handle_response)+;
+cics_inquire_monitor: (MONITOR | (APPLNAMEST | COMPRESSST | CONVERSEST | EXCEPTCLASS | IDNTYCLASS | PERFCLASS | RESRCECLASS | RMIST | STATUS | SYNCPOINTST | TIME) cics_cvda | (DPLLIMIT | FILELIMIT | FREQUENCY | FREQUENCYHRS | FREQUENCYMINS | FREQUENCYSECS | TSQUEUELIMIT | URIMAPLIMIT | WEBSERVLIMIT) cics_data_area | cics_handle_response)+;
+cics_inquire_mqconn: (MQCONN | (CHANGEAGENT | CONNECTST | INSTALLAGENT | RESYNCNUMBER) cics_cvda | (CHANGEAGREL | CHANGETIME | CHANGEUSRID | DEFINESOURCE | DEFINETIME | INSTALLTIME | INSTALLUSRID | MQNAME | MQQMGR | MQRELEASE | TASKS | TRIGMONTASKS) cics_data_area | cics_handle_response)+;
+cics_inquire_mqini: (MQINI cics_data_value | (CHANGEAGENT | INSTALLAGENT) cics_cvda | (CHANGEAGREL | CHANGETIME | CHANGEUSRID | DEFINESOURCE | DEFINETIME | INITQNAME | INSTALLTIME | INSTALLUSRID) cics_data_area | cics_handle_response)+;
+cics_inquire_mqmonitor: (MQMONITOR cics_data_value | (AUTOSTART | CHANGEAGENT | ENABLESTATUS | INSTALLAGENT | MONSTATUS) cics_cvda | (CHANGEAGREL | CHANGETIME | CHANGEUSRID | DEFINESOURCE | DEFINETIME | INSTALLTIME | INSTALLUSRID | MONDATA | MONUSERID | QNAME | TASKID | TRANSACTION | USERID) cics_data_area | cics_handle_response)+;
+cics_inquire_mvstcb: ((MVSTCB | SET) cics_ref | NUMELEMENTS cics_data_area | cics_handle_response)+;
 
 /** INVOKE SERVICE */
 cics_invoke: INVOKE (SERVICE cics_data_value | CHANNEL cics_data_value | OPERATION cics_data_value | URI cics_data_value |
@@ -962,8 +978,8 @@ cicsWord
 cicsWords
     : AUTOINSTALL | DB2CONN | DELETSHIPPED | DISPATCHER | DUMPDS | ENDFILE | ENQ | ERROR | EVENTPROCESS | ABORT | ADDRESS | AFTER | ALTER | AS | ASSIGN | AT | ATTACH | BINARY | CANCEL | CHANNEL | CLASS | CLOSE
     | CONTROL | COPY | DATA | DELETE | DELIMITER | DETAIL | END | ENTER | ENTRY | EQUAL | ERASE | EVENT
-    | EXCEPTION | EXTERNAL | FOR | FROM | INPUT | INTO | INVOKE | LABEL | LAST | LENGTH | LINE | LINK | LIST | MESSAGE
-    | MMDDYYYY | MODE | ORGANIZATION | OUTPUT | PAGE | PARSE | PASSWORD | PROCESS
+    | EXCEPTION | EXTERNAL | FOR | FROM | INPUT | INTO | INVOKE | IRC | LABEL | LAST | LENGTH | LINE | LINK | LIST | MESSAGE
+    | MMDDYYYY | MODE | MONITOR | MQCONN | ORGANIZATION | OUTPUT | PAGE | PARSE | PASSWORD | PROCESS
     | PROGRAM | PURGE | RECEIVE | RECORD | RELEASE | REPLACE | RESET | RETURN | REWIND | REWRITE
     | RUN | SECURITY | SEND | SERVICE | SHARED | START | STATUS | SYNCONRETURN | SYMBOL | TASK | TERMINAL | TEST | TEXT
     | TIMER | TITLE | TYPE | VALUE | WAIT | YEAR | YYYYDDD | YYYYMMDD | COMMAREA
@@ -992,6 +1008,7 @@ cicsLexerDefinedVariableUsageTokens:
 	| ACQUACTIVITY
 	| ACQSTATUS
 	| ACTION
+	| ACTIVE
 	| ACTIVITY
 	| ACTIVITYID
 	| ACTOPENTCBS
@@ -1013,6 +1030,7 @@ cicsLexerDefinedVariableUsageTokens:
 	| APPENDCRLF
 	| APPLDATA
 	| APPLID
+	| APPLNAMEST
 	| AS
 	| ASA
 	| ASIS
@@ -1036,9 +1054,11 @@ cicsLexerDefinedVariableUsageTokens:
 	| AUTINSTMODEL
 	| AUTOCONNECT
 	| AUTOPAGE
+	| AUTOSTART
 	| AUTHORITY
 	| AUXILIARY
 	| AVAILABILITY
+	| AVAILABLE
 	| BACKUPTYPE
 	| BASE64
 	| BASEDSNAME
@@ -1120,6 +1140,7 @@ cicsLexerDefinedVariableUsageTokens:
 	| COMPAREMIN
 	| COMPLETE
 	| COMPOSITE
+	| COMPRESSST
 	| COMPSTATUS
 	| COMTHREADLIM
 	| COMTHREADS
@@ -1141,6 +1162,7 @@ cicsLexerDefinedVariableUsageTokens:
 	| CONTEXTTYPE
 	| CONVDATA
 	| CONVERSE
+	| CONVERSEST
 	| CONVERTST
 	| CONVERTTIME
 	| CONVID
@@ -1153,6 +1175,7 @@ cicsLexerDefinedVariableUsageTokens:
 	| CTLCHAR
 	| CURRENT
 	| CURRENTDDS
+	| CURRENTHEAP
 	| CURREQS
 	| CURRPGM
 	| CURRPGMOP
@@ -1222,8 +1245,26 @@ cicsLexerDefinedVariableUsageTokens:
 	| DOCTEMPLATE
 	| DOCTOKEN
 	| DOCUMENT
+	| DPLLIMIT
 	| DROLLBACK
 	| DS3270
+	| DSNAME01
+	| DSNAME02
+	| DSNAME03
+	| DSNAME04
+	| DSNAME05
+	| DSNAME06
+	| DSNAME07
+	| DSNAME08
+	| DSNAME09
+	| DSNAME10
+	| DSNAME11
+	| DSNAME12
+	| DSNAME13
+	| DSNAME14
+	| DSNAME15
+	| DSNAME16
+	| DSNAMELIST
 	| DSSCS
 	| DUMP
 	| DUMPCODE
@@ -1274,6 +1315,7 @@ cicsLexerDefinedVariableUsageTokens:
 	| EVENTTYPE
 	| EVENTUAL
 	| EWASUPP
+	| EXCEPTCLASS
 	| EXCLUSIVE
 	| EXIT
 	| EXITPGM
@@ -1300,6 +1342,7 @@ cicsLexerDefinedVariableUsageTokens:
 	| FIELD
 	| FIELDLENGTH
 	| FILECOUNT
+	| FILELIMIT
 	| FILENAME
 	| FILEPATH
 	| FILTERVALUE
@@ -1314,6 +1357,10 @@ cicsLexerDefinedVariableUsageTokens:
 	| FORMFIELD
 	| FREEKB
 	| FREEMAIN
+	| FREQUENCY
+	| FREQUENCYHRS
+	| FREQUENCYMINS
+	| FREQUENCYSECS
 	| FROMACTIVITY
 	| FROMCCSID
 	| FROMCHANNEL
@@ -1341,6 +1388,7 @@ cicsLexerDefinedVariableUsageTokens:
 	| GRNAME
 	| GROUPID
 	| GTEQ
+	| HA
 	| HANDLE
 	| HEAD
 	| HEADER
@@ -1364,14 +1412,18 @@ cicsLexerDefinedVariableUsageTokens:
 	| IDLEHRS
 	| IDLEMINS
 	| IDLESECS
+	| IDNTYCLASS
+	| IDPROP
 	| IGNORE
 	| IMMEDIATE
 	| INCREMENT
 	| INDOUBTST
+	| INITHEAP
 	| INITIALDDS
 	| INITIMG
 	| INITPARM
 	| INITPARMLEN
+    | INITQNAME
 	| INITUSERID
 	| INPARTN
 	| INPUTEVENT
@@ -1394,17 +1446,24 @@ cicsLexerDefinedVariableUsageTokens:
 	| INVPARTN
 	| INVREQ
 	| IPCONN
+	| IPFACILITY
+	| IPFACILTYPE
 	| IPFAMILY
 	| ISSUE
 	| ISSUER
 	| ITEM
 	| ITEMNAME
 	| IUTYPE
+	| JAVAHOME
+	| JOURNALMODEL
 	| JOURNALNAME
 	| JTYPEID
 	| JUSFIRST
 	| JUSLAST
 	| JUSTIFY
+	| JVMENDPOINT
+	| JVMPROFILE
+	| JVMSERVER
 	| KATAKANA
 	| KEEP
 	| KEEPTIME
@@ -1422,12 +1481,15 @@ cicsLexerDefinedVariableUsageTokens:
 	| LDCNUM
 	| LEAVEKB
 	| LENGTHLIST
+	| LERUNOPTS
 	| LEVEL
+	| LIBRARY
 	| LIGHTPEN
 	| LINAGE_COUNTER
 	| LINEADDR
 	| LINK
 	| LINKAGE
+	| LINKAUTH
 	| LINKLEVEL
 	| LINKSYSNET
 	| LINKSYSTEM
@@ -1442,6 +1504,7 @@ cicsLexerDefinedVariableUsageTokens:
 	| LOCALITY
 	| LOCALITYLEN
 	| LOCATION
+	| LOG
 	| LOGMESSAGE
 	| LOGMODE
 	| LOGONLOGMODE
@@ -1467,15 +1530,18 @@ cicsLexerDefinedVariableUsageTokens:
 	| MASSINSERT
 	| MAXDATALEN
 	| MAXFLENGTH
+	| MAXHEAP
 	| MAXIMUM
 	| MAXLENGTH
 	| MAXLIFETIME
 	| MAXNUMRECS
 	| MAXOPENTCBS
 	| MAXPROCLEN
+	| MAXQTIME
 	| MAXREQS
 	| MAXSSLTCBS
 	| MAXTHRDTCBS
+	| MAXWINNERS
 	| MAXXPTCBS
 	| MCC
 	| MEDIATYPE
@@ -1492,12 +1558,20 @@ cicsLexerDefinedVariableUsageTokens:
 	| MINIMUM
 	| MINORVERSION
 	| MINUTES
+	| MIRRORLIFE
 	| MMDDYY
 	| MMDDYYYY
 	| MODENAME
-	| MONITOR
 	| MONTH
 	| MONTHOFYEAR
+	| MONDATA
+	| MONSTATUS
+	| MONUSERID
+	| MQINI
+	| MQMONITOR
+	| MQNAME
+	| MQQMGR
+	| MQRELEASE
 	| MROBATCH
 	| MSGQUEUE1
 	| MSGQUEUE2
@@ -1505,6 +1579,7 @@ cicsLexerDefinedVariableUsageTokens:
 	| MSR
 	| MSRCONTROL
 	| MVSIMAGE
+	| MVSTCB
 	| NAME
 	| NAMELENGTH
 	| NAMESPACE
@@ -1513,6 +1588,7 @@ cicsLexerDefinedVariableUsageTokens:
 	| NETID
 	| NETNAME
 	| NETUOWID
+	| NETWORKID
 	| NEWPASSWORD
 	| NEWPHRASE
 	| NEWPHRASELEN
@@ -1546,6 +1622,8 @@ cicsLexerDefinedVariableUsageTokens:
 	| NSCONTAINER
 	| NUMCIPHERS
 	| NUMDATAPRD
+	| NUMDSNAMES
+	| NUMELEMENTS
 	| NUMEVENTS
 	| NUMEXITS
 	| NUMINFOSRCE
@@ -1556,6 +1634,7 @@ cicsLexerDefinedVariableUsageTokens:
 	| NUMSEGMENTS
 	| NUMTAB
 	| OBJECT
+	| OCCUPANCY
 	| ODADPTRDATA1
 	| ODADPTRDATA2
 	| ODADPTRDATA3
@@ -1617,6 +1696,7 @@ cicsLexerDefinedVariableUsageTokens:
 	| PATHLENGTH
 	| PCT
 	| PENDSTATUS
+	| PERFCLASS
 	| PF1
 	| PF10
 	| PF11
@@ -1650,6 +1730,7 @@ cicsLexerDefinedVariableUsageTokens:
 	| PHSTARTTIME
 	| PHTASKID
 	| PHTRANSID
+	| PID
 	| PIPLENGTH
 	| PIPLIST
 	| PLAN
@@ -1677,6 +1758,7 @@ cicsLexerDefinedVariableUsageTokens:
 	| PROCLENGTH
 	| PROCNAME
 	| PROFILE
+	| PROFILEDIR
 	| PROTECT
 	| PROTECTNUM
 	| PROTOCOL
@@ -1702,7 +1784,9 @@ cicsLexerDefinedVariableUsageTokens:
 	| QUERYPARM
 	| QUERYSTRING
 	| QUERYSTRLEN
+	| QUEUELIMIT
 	| QUIESCESTATE
+	| RANKING
 	| RBA
 	| RBATYPE
 	| RBN
@@ -1747,6 +1831,7 @@ cicsLexerDefinedVariableUsageTokens:
 	| RESOURCE
 	| RESOURCENAME
 	| RESOURCETYPE
+	| RESRCECLASS
 	| REPETABLE
 	| REPLY
 	| REPLYLENGTH
@@ -1765,6 +1850,7 @@ cicsLexerDefinedVariableUsageTokens:
 	| RESULT
 	| RESUME
 	| RESYNCMEMBER
+	| RESYNCNUMBER
 	| RETAIN
 	| RETCODE
 	| RETCORD
@@ -1775,6 +1861,7 @@ cicsLexerDefinedVariableUsageTokens:
 	| REUSELIMIT
 	| RIDFLD
 	| RLSACCESS
+	| RMIST
 	| ROLE
 	| ROLELENGTH
 	| ROLLBACK
@@ -1794,7 +1881,10 @@ cicsLexerDefinedVariableUsageTokens:
 	| SCOPELEN
 	| SCRNHT
 	| SCRNWD
+	| SEARCHPOS
 	| SECONDS
+	| SECPORT
+	| SECURITYNAME
 	| SEGMENTLIST
 	| SENDCOUNT
 	| SENDER
@@ -1843,7 +1933,10 @@ cicsLexerDefinedVariableUsageTokens:
 	| STATUSLEN
 	| STATSQUEUE
 	| STATUSTEXT
+	| STDERR
+	| STDOUT
 	| STORAGE
+	| STREAMNAME
 	| STRFIELD
 	| STRINGFORMAT
 	| STRINGS
@@ -1870,6 +1963,7 @@ cicsLexerDefinedVariableUsageTokens:
 	| SYNCLEVEL
 	| SYNCONRETURN
 	| SYNCPOINT
+	| SYNCPOINTST
 	| SYSID
 	| TABLE
 	| TABLENAME
@@ -1879,6 +1973,7 @@ cicsLexerDefinedVariableUsageTokens:
 	| TASK
 	| TASKID
 	| TASKPRIORITY
+	| TASKS
 	| TCBLIMIT
 	| TCBS
 	| TCPIP
@@ -1900,6 +1995,7 @@ cicsLexerDefinedVariableUsageTokens:
 	| TEXTKYBD
 	| TEXTLENGTH
 	| TEXTPRINT
+	| THREADCOUNT
 	| THREADERROR
 	| THREADLIMIT
 	| THREADS
@@ -1922,7 +2018,9 @@ cicsLexerDefinedVariableUsageTokens:
 	| TRANSID
 	| TRANSMODE
 	| TRIGGER
+	| TRIGMONTASKS
 	| TRNGRPID
+	| TSQUEUELIMIT
 	| TRT
 	| TS
 	| TWA
@@ -1941,9 +2039,11 @@ cicsLexerDefinedVariableUsageTokens:
 	| UPDATEMODEL
 	| URI
 	| URIMAP
+	| URIMAPLIMIT
 	| URL
 	| URLLENGTH
 	| USECOUNT
+	| USERAUTH
 	| USERCORRDATA
 	| USERDATAKEY
 	| USERID
@@ -1963,7 +2063,9 @@ cicsLexerDefinedVariableUsageTokens:
 	| WAIT
 	| WAITCICS
 	| WEB
+	| WEBSERVLIMIT
 	| WHEN_COMPILED
+	| WORKDIR
 	| WPMEDIA1
 	| WPMEDIA2
 	| WPMEDIA3
@@ -1972,6 +2074,7 @@ cicsLexerDefinedVariableUsageTokens:
 	| WRITEQ
 	| WSACONTEXT
 	| WSAEPR
+	| XCFGROUP
 	| XCTL
 	| XLNSTATUS
 	| XMLCONTAINER
